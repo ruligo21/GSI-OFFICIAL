@@ -13,15 +13,16 @@
       color-scheme: dark;
       --bg: #040d0f;
       --panel: rgba(8, 22, 27, 0.88);
+      --panel-2: rgba(12, 28, 34, 0.82);
       --text: #ecfdf5;
-      --muted: #94a3b8;
+      --muted: #8ba3a6;
       --line: rgba(167, 243, 208, 0.1);
       --green: #34d399;
       --green-strong: #10b981;
-      --green-glow: rgba(52, 211, 153, 0.25);
+      --green-glow: rgba(52, 211, 153, 0.3);
       --blue: #67e8f9;
       --blue-strong: #22d3ee;
-      --blue-glow: rgba(103, 232, 249, 0.2);
+      --blue-glow: rgba(103, 232, 249, 0.25);
       --teal: #2dd4bf;
       --amber: #fbbf24;
       --shadow: 0 28px 80px rgba(0, 0, 0, 0.5);
@@ -41,389 +42,254 @@
       font-family: var(--font-main);
       color: var(--text);
       background: var(--bg);
-      background-image:
-        radial-gradient(ellipse 800px 600px at 10% 15%, rgba(52, 211, 153, 0.14), transparent),
-        radial-gradient(ellipse 600px 500px at 85% 10%, rgba(34, 211, 238, 0.12), transparent),
-        radial-gradient(ellipse 700px 500px at 70% 85%, rgba(45, 212, 191, 0.08), transparent),
-        linear-gradient(180deg, #060e12 0%, #040d0f 50%, #030a0c 100%);
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
-      position: relative;
     }
+    /* Dynamic gradient bg via pseudo */
     body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 900px 700px at 12% 18%, rgba(52, 211, 153, 0.10), transparent),
+        radial-gradient(ellipse 700px 600px at 85% 12%, rgba(34, 211, 238, 0.08), transparent),
+        radial-gradient(ellipse 800px 700px at 72% 82%, rgba(45, 212, 191, 0.06), transparent),
+        radial-gradient(ellipse 400px 400px at 40% 50%, rgba(52, 211, 153, 0.03), transparent);
+      background-color: #040d0f;
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::after {
       content: "";
       position: fixed;
       inset: 0;
       pointer-events: none;
       background-image:
-        linear-gradient(rgba(52, 211, 153, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(52, 211, 153, 0.02) 1px, transparent 1px);
-      background-size: 56px 56px;
-      mask-image: radial-gradient(ellipse at center, black, transparent 75%);
+        linear-gradient(rgba(52, 211, 153, 0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(52, 211, 153, 0.018) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse at center, black, transparent 72%);
       z-index: 0;
     }
     a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; }
     ul, ol { list-style: none; }
-    .shell {
-      position: relative;
-      z-index: 2;
-      width: var(--w);
-      margin: 0 auto;
-      padding: 0 0 50px;
-    }
+    .shell { position: relative; z-index: 2; width: var(--w); margin: 0 auto; padding: 0 0 50px; }
 
-    /* PARTICLES CANVAS */
-    #particles {
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      width: 100%;
-      height: 100%;
-    }
+    /* PARTICLES */
+    #particles { position: fixed; inset: 0; z-index: 1; pointer-events: none; width: 100%; height: 100%; }
 
     /* TOPBAR */
     .topbar {
-      position: sticky;
-      top: 14px;
-      z-index: 50;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 14px 20px;
-      margin-top: 14px;
-      margin-bottom: 30px;
+      position: sticky; top: 14px; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 14px 20px; margin-top: 14px; margin-bottom: 30px;
       background: rgba(6, 16, 20, 0.82);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-full);
-      backdrop-filter: blur(24px);
-      box-shadow: var(--shadow);
+      border: 1px solid var(--line); border-radius: var(--radius-full);
+      backdrop-filter: blur(24px); box-shadow: var(--shadow);
     }
     .brand { display: flex; align-items: center; gap: 12px; }
-    .brand-dot {
-      width: 14px; height: 14px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--green), var(--blue));
-      box-shadow: 0 0 0 5px rgba(52, 211, 153, 0.12), 0 0 20px var(--green-glow);
-    }
-    .brand-text strong { display: block; font-family: var(--font-display); font-size: 1.05rem; letter-spacing: 0.02em; }
+    .brand-logo svg { width: 34px; height: 34px; }
+    .brand-text strong { display: block; font-family: var(--font-display); font-size: 1.05rem; }
     .brand-text span { color: var(--muted); font-size: 0.82rem; }
     .nav { display: flex; align-items: center; gap: 26px; }
     .nav a { color: var(--muted); font-size: 0.92rem; font-weight: 500; transition: color 0.2s; }
     .nav a:hover { color: var(--text); }
 
-    /* BUTTONS */
     .btn {
-      display: inline-flex;
-      align-items: center; justify-content: center; gap: 10px;
-      min-height: 48px; padding: 0 22px;
-      border-radius: var(--radius-full); border: 1px solid transparent;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      min-height: 48px; padding: 0 22px; border-radius: var(--radius-full); border: 1px solid transparent;
       font-family: var(--font-main); font-size: 0.95rem; font-weight: 700;
-      cursor: pointer;
-      transition: transform 0.16s, box-shadow 0.25s;
+      cursor: pointer; transition: transform 0.16s, box-shadow 0.25s;
     }
     .btn:hover { transform: translateY(-2px); }
     .btn-green { background: linear-gradient(135deg, var(--green), var(--green-strong)); color: #022c22; box-shadow: var(--shadow-green); }
     .btn-green:hover { box-shadow: 0 24px 50px rgba(16, 185, 129, 0.25); }
-    .btn-ghost { background: rgba(255, 255, 255, 0.03); border-color: var(--line); color: var(--text); }
+    .btn-ghost { background: rgba(255,255,255,0.03); border-color: var(--line); }
     .btn-sm { min-height: 40px; padding: 0 16px; font-size: 0.88rem; }
 
     .eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 8px 16px; margin-bottom: 18px;
-      border-radius: var(--radius-full);
-      background: rgba(52, 211, 153, 0.1);
-      border: 1px solid rgba(52, 211, 153, 0.15);
-      color: var(--green); font-size: 0.82rem; font-weight: 700;
-      letter-spacing: 0.06em; text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; margin-bottom: 18px;
+      border-radius: var(--radius-full); background: rgba(52,211,153,0.1);
+      border: 1px solid rgba(52,211,153,0.15); color: var(--green);
+      font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
     }
 
-    /* ============ HERO ============ */
-    .hero {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 32px;
-      align-items: center;
-      padding: 44px 0 32px;
-    }
-    .hero-copy h1 {
-      font-family: var(--font-display);
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      line-height: 1;
-      letter-spacing: -0.04em;
-    }
-    .gradient-text {
-      background: linear-gradient(135deg, var(--green), var(--blue));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
+    /* ===== HERO ===== */
+    .hero { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 32px; align-items: center; padding: 44px 0 32px; }
+    .hero-copy h1 { font-family: var(--font-display); font-size: clamp(2.8rem,6vw,5rem); line-height: 1; letter-spacing: -0.04em; }
+    .gradient-text { background: linear-gradient(135deg,var(--green),var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .hero-subtitle { font-size: 1.15rem; line-height: 1.7; color: var(--muted); max-width: 52ch; margin: 16px 0 0; }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin: 28px 0 20px; }
     .hero-tags { display: flex; flex-wrap: wrap; gap: 10px; }
-    .tag {
-      display: inline-flex; align-items: center; min-height: 30px; padding: 0 12px;
-      border-radius: var(--radius-full);
-      background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.07);
-      color: var(--muted); font-size: 0.82rem; font-weight: 600;
-    }
+    .tag { display: inline-flex; align-items: center; min-height: 30px; padding: 0 12px; border-radius: var(--radius-full); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); color: var(--muted); font-size: 0.82rem; font-weight: 600; }
 
-    /* HERO VISUAL */
-    .hero-visual {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 460px;
-    }
+    /* ===== CRYPTO VISUAL ===== */
+    .hero-visual { position: relative; display: flex; align-items: center; justify-content: center; min-height: 480px; }
+    .crypto-orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; opacity: 0.6; }
+    .cr-1 { width: 240px; height: 240px; top: -20px; right: 10px; background: var(--green-glow); }
+    .cr-2 { width: 180px; height: 180px; bottom: 10px; left: -10px; background: var(--blue-glow); }
+    .cr-3 { width: 120px; height: 120px; top: 40%; left: 40%; background: rgba(45,212,191,0.15); }
 
-    /* Crypto illustration */
-    .crypto-scene {
-      position: relative;
-      width: 380px;
-      height: 380px;
-    }
+    .scene { position: relative; width: 400px; height: 400px; }
 
-    /* Central orb */
-    .orb-center {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(52, 211, 153, 0.4), rgba(34, 211, 238, 0.2), transparent 70%);
-      box-shadow: 0 0 60px rgba(52, 211, 153, 0.3), 0 0 120px rgba(34, 211, 238, 0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: orbPulse 4s ease-in-out infinite;
+    /* Center orb */
+    .center-orb {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 130px; height: 130px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(52,211,153,0.4), rgba(34,211,238,0.2), transparent 70%);
+      box-shadow: 0 0 80px rgba(52,211,153,0.3), 0 0 160px rgba(34,211,238,0.12);
+      display: flex; align-items: center; justify-content: center;
+      animation: centerFloat 5s ease-in-out infinite;
+      z-index: 2;
     }
-    .orb-center-inner {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
+    .center-orb-inner {
+      width: 76px; height: 76px; border-radius: 50%;
       background: linear-gradient(135deg, var(--green), var(--blue));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.8rem;
-      box-shadow: 0 0 30px var(--green-glow);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 40px var(--green-glow);
     }
-    @keyframes orbPulse {
-      0%, 100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 60px rgba(52, 211, 153, 0.3), 0 0 120px rgba(34, 211, 238, 0.15); }
-      50% { transform: translate(-50%, -53%) scale(1.06); box-shadow: 0 0 80px rgba(52, 211, 153, 0.4), 0 0 160px rgba(34, 211, 238, 0.2); }
+    .center-orb-inner svg { width: 40px; height: 40px; }
+    @keyframes centerFloat {
+      0%,100% { transform: translate(-50%,-50%) scale(1); }
+      50% { transform: translate(-50%,-55%) scale(1.05); }
     }
 
-    /* Orbit rings */
-    .orbit-ring {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      border-radius: 50%;
-      border: 1px dashed rgba(52, 211, 153, 0.25);
-      transform: translate(-50%, -50%);
-      animation: orbitSpin 25s linear infinite;
-    }
-    .orbit-ring.r1 { width: 260px; height: 260px; animation-duration: 25s; }
-    .orbit-ring.r2 { width: 340px; height: 340px; animation-duration: 35s; animation-direction: reverse; border-color: rgba(103, 232, 249, 0.2); }
-    @keyframes orbitSpin { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
+    /* Rings */
+    .ring { position: absolute; top: 50%; left: 50%; border-radius: 50%; transform: translate(-50%,-50%); }
+    .ring-1 { width: 280px; height: 280px; border: 1.5px dashed rgba(52,211,153,0.2); animation: spin 30s linear infinite; }
+    .ring-2 { width: 360px; height: 360px; border: 1px dashed rgba(103,232,249,0.15); animation: spin 40s linear infinite reverse; }
+    .ring-3 { width: 320px; height: 320px; border: 1px dotted rgba(45,212,191,0.1); animation: spin 35s linear infinite; }
+    @keyframes spin { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(360deg); } }
 
-    /* Floating coins */
-    .coin {
-      position: absolute;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      font-size: 0.7rem;
-      font-weight: 800;
-      color: #fff;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
-      z-index: 3;
+    /* SVG lines */
+    .scene-lines { position: absolute; inset: 0; z-index: 1; pointer-events: none; width: 100%; height: 100%; }
+
+    /* Coin orbiting items */
+    .orbit-item {
+      position: absolute; z-index: 3;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: #fff;
+      animation: coinBob 4s ease-in-out infinite;
     }
-    .coin img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-    /* BNB */
-    .coin-bnb {
-      width: 56px; height: 56px;
-      background: linear-gradient(135deg, #f0b90b, #d4a40a);
-      top: 8%; left: 12%;
-      animation: coinFloat 5s ease-in-out infinite;
-      animation-delay: 0s;
-    }
-    /* ETH */
-    .coin-eth {
-      width: 52px; height: 52px;
-      background: linear-gradient(135deg, #627eea, #8b9ff8);
-      top: 6%; right: 18%;
-      animation: coinFloat 5s ease-in-out infinite;
-      animation-delay: 0.8s;
-    }
-    /* POL */
-    .coin-pol {
-      width: 48px; height: 48px;
-      background: linear-gradient(135deg, #8247e5, #a76bfa);
-      bottom: 18%; left: 8%;
-      animation: coinFloat 5s ease-in-out infinite;
-      animation-delay: 1.6s;
-    }
-    /* SOL */
-    .coin-sol {
-      width: 50px; height: 50px;
-      background: linear-gradient(135deg, #14f195, #00d29a);
-      bottom: 12%; right: 10%;
-      animation: coinFloat 5s ease-in-out infinite;
-      animation-delay: 2.4s;
-    }
-    /* GRAM */
-    .coin-gram {
-      width: 46px; height: 46px;
-      background: linear-gradient(135deg, #0098ea, #48b8f0);
-      top: 48%; left: 0;
-      animation: coinFloat 5s ease-in-out infinite;
-      animation-delay: 3.2s;
-    }
-    /* RON */
-    .coin-ron {
-      width: 44px; height: 44px;
-      background: linear-gradient(135deg, #e84142, #f07070);
-      top: 48%; right: 0;
-      animation: coinFloat 5s ease-in-out infinite;
-      animation-delay: 4s;
-    }
-    @keyframes coinFloat {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-12px); }
+    .orbit-item svg { width: 100%; height: 100%; border-radius: 50%; }
+
+    @keyframes coinBob {
+      0%,100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-10px) scale(1.05); }
     }
 
-    /* Connection lines SVG */
-    .scene-lines {
-      position: absolute;
-      inset: 0;
+    /* Position each coin */
+    .coin-1 { top: 4%; left: 18%; width: 60px; height: 60px; animation-delay: 0s; }
+    .coin-2 { top: 3%; right: 15%; width: 56px; height: 56px; animation-delay: 0.6s; }
+    .coin-3 { bottom: 22%; left: 6%; width: 52px; height: 52px; animation-delay: 1.2s; }
+    .coin-4 { bottom: 14%; right: 8%; width: 54px; height: 54px; animation-delay: 1.8s; }
+    .coin-5 { top: 46%; left: -2%; width: 48px; height: 48px; animation-delay: 2.4s; }
+    .coin-6 { top: 46%; right: -2%; width: 48px; height: 48px; animation-delay: 3s; }
+
+    /* Small floating elements (dots) */
+    .float-dot {
+      position: absolute; border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(52,211,153,0.6), transparent);
+      animation: dotFloat 6s ease-in-out infinite;
       z-index: 1;
-      pointer-events: none;
+    }
+    .fd-1 { width: 12px; height: 12px; top: 20%; right: 8%; animation-delay: 0.5s; opacity: 0.5; }
+    .fd-2 { width: 8px; height: 8px; bottom: 35%; right: 2%; animation-delay: 2s; opacity: 0.4; background: radial-gradient(circle, rgba(103,232,249,0.6), transparent); }
+    .fd-3 { width: 10px; height: 10px; top: 35%; left: 3%; animation-delay: 3.5s; opacity: 0.3; }
+    @keyframes dotFloat {
+      0%,100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-18px) scale(1.3); }
     }
 
-    /* Glow blobs around visual */
-    .glow-blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(60px);
-      pointer-events: none;
-      z-index: 0;
-    }
-    .gb1 { width: 200px; height: 200px; top: -20px; right: 0; background: rgba(52, 211, 153, 0.35); }
-    .gb2 { width: 160px; height: 160px; bottom: 0; left: -20px; background: rgba(103, 232, 249, 0.25); }
-    .gb3 { width: 120px; height: 120px; top: 30%; left: 30%; background: rgba(45, 212, 191, 0.15); }
-
-    /* ============ SECTION ============ */
+    /* ===== SECTIONS ===== */
     .section { padding: 48px 0; }
     .section-head { max-width: 700px; margin-bottom: 28px; }
-    .section-head h2 {
-      font-family: var(--font-display); font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      line-height: 1.1; letter-spacing: -0.03em; margin: 0;
-    }
+    .section-head h2 { font-family: var(--font-display); font-size: clamp(1.8rem,3.5vw,2.8rem); line-height: 1.1; letter-spacing: -0.03em; margin: 0; }
     .section-head p { margin: 12px 0 0; color: var(--muted); font-size: 1.05rem; line-height: 1.7; }
 
     /* STATS */
-    .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .stats-bar { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
     .stats-bar article {
-      padding: 22px; border-radius: var(--radius-lg);
-      background: var(--panel); border: 1px solid var(--line); text-align: center;
-      transition: transform 0.2s, border-color 0.2s;
+      padding: 22px; border-radius: var(--radius-lg); background: var(--panel);
+      border: 1px solid var(--line); text-align: center;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+      position: relative; overflow: hidden;
     }
-    .stats-bar article:hover { transform: translateY(-3px); border-color: rgba(52,211,153,0.25); }
+    .stats-bar article::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--green), var(--blue));
+      opacity: 0; transition: opacity 0.25s;
+    }
+    .stats-bar article:hover::before { opacity: 1; }
+    .stats-bar article:hover { transform: translateY(-4px); border-color: rgba(52,211,153,0.2); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
     .stats-bar strong {
       display: block; font-family: var(--font-display); font-size: 2rem;
-      background: linear-gradient(135deg, var(--green), var(--blue));
+      background: linear-gradient(135deg,var(--green),var(--blue));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       margin-bottom: 6px;
     }
     .stats-bar span { color: var(--muted); font-size: 0.88rem; }
 
     /* FEATURES */
-    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .features { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
     .feature {
-      padding: 26px; border-radius: var(--radius-lg);
-      background: var(--panel); border: 1px solid var(--line);
+      padding: 26px; border-radius: var(--radius-lg); background: var(--panel);
+      border: 1px solid var(--line);
       transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+      position: relative; overflow: hidden;
     }
-    .feature:hover { border-color: rgba(52, 211, 153, 0.2); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.3); }
-    .feature-icon {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 50px; height: 50px; border-radius: var(--radius-md); font-size: 1.5rem; margin-bottom: 18px;
-      transition: transform 0.3s;
+    .feature::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--green), var(--blue));
+      opacity: 0; transition: opacity 0.25s;
     }
+    .feature:hover::after { opacity: 1; }
+    .feature:hover { border-color: rgba(52,211,153,0.2); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.3); }
+    .feature-icon { display: inline-flex; align-items: center; justify-content: center; width: 50px; height: 50px; border-radius: var(--radius-md); margin-bottom: 18px; transition: transform 0.3s; }
     .feature:hover .feature-icon { transform: scale(1.15) rotate(-5deg); }
-    .fi-green { background: rgba(52, 211, 153, 0.12); }
-    .fi-blue { background: rgba(103, 232, 249, 0.12); }
-    .fi-teal { background: rgba(45, 212, 191, 0.12); }
-    .fi-amber { background: rgba(251, 191, 36, 0.12); }
+    .fi-green { background: rgba(52,211,153,0.12); }
+    .fi-blue { background: rgba(103,232,249,0.12); }
+    .fi-teal { background: rgba(45,212,191,0.12); }
+    .fi-amber { background: rgba(251,191,36,0.12); }
     .feature h3 { margin: 0 0 10px; font-size: 1.1rem; }
     .feature p { color: var(--muted); line-height: 1.7; margin: 0; font-size: 0.95rem; }
 
     /* STEPS */
     .steps { display: grid; gap: 14px; }
     .step {
-      display: flex; align-items: flex-start; gap: 18px;
-      padding: 24px; border-radius: var(--radius-lg);
-      background: var(--panel); border: 1px solid var(--line);
-      transition: border-color 0.2s, transform 0.25s, box-shadow 0.25s;
+      display: flex; align-items: flex-start; gap: 18px; padding: 24px;
+      border-radius: var(--radius-lg); background: var(--panel); border: 1px solid var(--line);
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
     }
     .step:hover { border-color: rgba(52,211,153,0.2); transform: translateX(6px); box-shadow: 0 8px 30px rgba(0,0,0,0.25); }
     .step-num {
-      flex: none; width: 44px; height: 44px;
-      display: flex; align-items: center; justify-content: center;
+      flex: none; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
       border-radius: var(--radius-md);
-      background: linear-gradient(135deg, rgba(52, 211, 153, 0.2), rgba(34, 211, 238, 0.12));
+      background: linear-gradient(135deg, rgba(52,211,153,0.2), rgba(34,211,238,0.12));
       font-family: var(--font-display); font-weight: 800; font-size: 1rem; color: var(--green);
     }
     .step-body h3 { margin: 0 0 8px; font-size: 1.1rem; }
     .step-body p { margin: 0; color: var(--muted); line-height: 1.65; }
 
     /* COMMANDS */
-    .cmd-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .cmd-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
     .cmd-item {
-      display: flex; align-items: flex-start; gap: 14px;
-      padding: 20px; border-radius: var(--radius-md);
-      background: var(--panel); border: 1px solid var(--line);
+      display: flex; align-items: flex-start; gap: 14px; padding: 20px;
+      border-radius: var(--radius-md); background: var(--panel); border: 1px solid var(--line);
       transition: border-color 0.2s, transform 0.2s;
     }
     .cmd-item:hover { border-color: rgba(52,211,153,0.2); transform: translateY(-2px); }
-    .cmd-icon {
-      flex: none; width: 42px; height: 42px;
-      display: flex; align-items: center; justify-content: center;
-      border-radius: var(--radius-sm);
-      background: linear-gradient(135deg, rgba(52, 211, 153, 0.14), rgba(34, 211, 238, 0.1));
-      font-size: 1.3rem;
-    }
+    .cmd-icon { flex: none; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-sm); background: linear-gradient(135deg, rgba(52,211,153,0.14), rgba(34,211,238,0.1)); font-size: 1.3rem; }
     .cmd-body h4 { margin: 0 0 4px; font-size: 1rem; }
-    .cmd-body code {
-      display: inline-block; padding: 2px 8px; border-radius: 6px;
-      background: rgba(52, 211, 153, 0.1); color: var(--green);
-      font-size: 0.85rem; font-weight: 700;
-    }
+    .cmd-body code { display: inline-block; padding: 2px 8px; border-radius: 6px; background: rgba(52,211,153,0.1); color: var(--green); font-size: 0.85rem; font-weight: 700; }
     .cmd-body p { margin: 6px 0 0; color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
 
     /* FAQ */
     .faq-list { display: grid; gap: 12px; }
-    .faq-item {
-      border-radius: var(--radius-md); background: var(--panel); border: 1px solid var(--line);
-      overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .faq-item:hover { border-color: rgba(52, 211, 153, 0.2); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
-    .faq-item summary {
-      cursor: pointer; list-style: none; padding: 22px 24px 18px;
-      font-size: 1.02rem; font-weight: 600;
-      display: flex; align-items: center; justify-content: space-between; gap: 14px;
-    }
+    .faq-item { border-radius: var(--radius-md); background: var(--panel); border: 1px solid var(--line); overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
+    .faq-item:hover { border-color: rgba(52,211,153,0.2); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+    .faq-item summary { cursor: pointer; list-style: none; padding: 22px 24px 18px; font-size: 1.02rem; font-weight: 600; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
     .faq-item summary::-webkit-details-marker { display: none; }
     .faq-item summary::after { content: '+'; font-size: 1.4rem; color: var(--green); transition: transform 0.25s; }
     .faq-item[open] summary::after { transform: rotate(45deg); }
@@ -433,47 +299,35 @@
     .cta-band {
       display: flex; align-items: center; justify-content: space-between; gap: 20px;
       padding: 32px; margin: 24px 0; border-radius: var(--radius-xl);
-      background: linear-gradient(135deg, rgba(52, 211, 153, 0.08), rgba(34, 211, 238, 0.06));
-      border: 1px solid rgba(52, 211, 153, 0.12);
-      transition: border-color 0.2s;
+      background: linear-gradient(135deg, rgba(52,211,153,0.08), rgba(34,211,238,0.06));
+      border: 1px solid rgba(52,211,153,0.12); transition: border-color 0.2s;
     }
-    .cta-band:hover { border-color: rgba(52, 211, 153, 0.25); }
-    .cta-band h2 { font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.15; letter-spacing: -0.03em; margin: 0; }
+    .cta-band:hover { border-color: rgba(52,211,153,0.25); }
+    .cta-band h2 { font-family: var(--font-display); font-size: clamp(1.6rem,3vw,2.2rem); line-height: 1.15; letter-spacing: -0.03em; margin: 0; }
     .cta-band p { margin: 6px 0 0; color: var(--muted); }
     .cta-actions { display: flex; gap: 12px; flex-shrink: 0; }
 
     .split { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
     .card {
-      padding: 28px; border-radius: var(--radius-lg);
-      background: var(--panel); border: 1px solid var(--line);
-      transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+      padding: 28px; border-radius: var(--radius-lg); background: var(--panel);
+      border: 1px solid var(--line); transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
     }
-    .card:hover { border-color: rgba(52, 211, 153, 0.2); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); transform: translateY(-3px); }
-    .card-num {
-      display: inline-flex; align-items: center; justify-content: center;
-      min-width: 36px; height: 36px; border-radius: var(--radius-full);
-      background: linear-gradient(135deg, rgba(52, 211, 153, 0.15), rgba(34, 211, 238, 0.12));
-      color: var(--green); font-family: var(--font-display); font-weight: 800; font-size: 0.95rem; margin-bottom: 18px;
-    }
+    .card:hover { border-color: rgba(52,211,153,0.2); box-shadow: 0 20px 50px rgba(0,0,0,0.3); transform: translateY(-3px); }
+    .card-num { display: inline-flex; align-items: center; justify-content: center; min-width: 36px; height: 36px; border-radius: var(--radius-full); background: linear-gradient(135deg, rgba(52,211,153,0.15), rgba(34,211,238,0.12)); color: var(--green); font-family: var(--font-display); font-weight: 800; font-size: 0.95rem; margin-bottom: 18px; }
     .card h3 { font-family: var(--font-display); font-size: 1.2rem; margin: 0 0 10px; }
     .card p { color: var(--muted); line-height: 1.7; margin: 0; }
 
     /* FOOTER */
-    .footer {
-      display: flex; align-items: center; justify-content: space-between; gap: 18px;
-      padding: 28px 0 0; margin-top: 20px; border-top: 1px solid var(--line);
-    }
+    .footer { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 28px 0 0; margin-top: 20px; border-top: 1px solid var(--line); }
     .footer strong { display: block; font-family: var(--font-display); font-size: 1rem; }
     .footer span { color: var(--muted); font-size: 0.9rem; }
     .footer-links { display: flex; gap: 20px; }
     .footer-links a { color: var(--muted); font-size: 0.9rem; transition: color 0.2s; }
     .footer-links a:hover { color: var(--text); }
 
-    /* SCROLL REVEAL */
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.is-visible { opacity: 1; transform: translateY(0); }
 
-    /* MOBILE */
     .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 6px; }
     .menu-toggle span { display: block; width: 22px; height: 2px; background: var(--text); margin: 5px 0; transition: 0.2s; }
 
@@ -483,7 +337,7 @@
       .stats-bar { grid-template-columns: 1fr 1fr; }
       .hero-visual { min-height: auto; }
       .cmd-grid { grid-template-columns: 1fr; }
-      .crypto-scene { width: 320px; height: 320px; margin: 0 auto; }
+      .scene { width: 340px; height: 340px; margin: 0 auto; }
     }
     @media (max-width: 768px) {
       .topbar { position: static; border-radius: var(--radius-lg); flex-wrap: wrap; justify-content: center; }
@@ -497,19 +351,23 @@
     }
     @media (max-width: 560px) {
       .shell { padding: 0 0 36px; }
-      .hero-copy h1 { font-size: clamp(2.2rem, 10vw, 3.4rem); }
+      .hero-copy h1 { font-size: clamp(2.2rem,10vw,3.4rem); }
       .hero-actions { flex-direction: column; }
       .hero-actions .btn { width: 100%; }
       .features { grid-template-columns: 1fr; }
       .stats-bar { gap: 10px; }
       .stats-bar article { padding: 16px; }
       .stats-bar strong { font-size: 1.5rem; }
-      .crypto-scene { width: 280px; height: 280px; }
-      .orb-center { width: 90px; height: 90px; }
-      .orb-center-inner { width: 55px; height: 55px; font-size: 1.4rem; }
-      .orbit-ring.r1 { width: 200px; height: 200px; }
-      .orbit-ring.r2 { width: 260px; height: 260px; }
-      .coin { transform: scale(0.85); }
+      .scene { width: 290px; height: 290px; }
+      .center-orb { width: 100px; height: 100px; }
+      .center-orb-inner { width: 60px; height: 60px; }
+      .center-orb-inner svg { width: 32px; height: 32px; }
+      .ring-1 { width: 220px; height: 220px; }
+      .ring-2 { width: 280px; height: 280px; }
+      .ring-3 { width: 250px; height: 250px; }
+      .orbit-item { transform: scale(0.8); }
+      .coin-1 { left: 14%; }
+      .coin-2 { right: 10%; }
     }
   </style>
 </head>
@@ -522,7 +380,14 @@
   <!-- TOPBAR -->
   <nav class="topbar reveal">
     <div class="brand">
-      <span class="brand-dot"></span>
+      <div class="brand-logo">
+        <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="17" cy="17" r="16" stroke="url(#g1)" stroke-width="1.5" fill="rgba(52,211,153,0.08)"/>
+          <path d="M10 20 L17 10 L24 20 Z" fill="url(#g1)" stroke="url(#g1)" stroke-width="0.5"/>
+          <circle cx="17" cy="20" r="2" fill="#022c22"/>
+          <defs><linearGradient id="g1" x1="0" y1="0" x2="34" y2="34"><stop stop-color="#34d399"/><stop offset="1" stop-color="#67e8f9"/></linearGradient></defs>
+        </svg>
+      </div>
       <div class="brand-text">
         <strong>GSI - RG CINEMA</strong>
         <span>GasFee Store Indonesia</span>
@@ -544,57 +409,69 @@
   <section class="hero">
     <div class="hero-copy reveal">
       <h1>Beli <span class="gradient-text">Gas Fee</span> Crypto dengan Mudah</h1>
-      <p class="hero-subtitle">
-        GSI (GasFee Store Indonesia) adalah layanan jual beli gas fee crypto multi-chain lewat Telegram Bot yang cepat, aman, dan terpercaya.
-      </p>
+      <p class="hero-subtitle">GSI — GasFee Store Indonesia. Layanan jual beli gas fee crypto multi-chain via Telegram Bot yang cepat, aman, dan terpercaya.</p>
       <div class="hero-actions">
         <a href="https://t.me/rgcinema_bot" target="_blank" class="btn btn-green">🚀 Mulai Beli Sekarang</a>
-        <a href="#panduan" class="btn btn-ghost">📖 Lihat Panduan</a>
+        <a href="#panduan" class="btn btn-ghost">📖 Panduan</a>
       </div>
       <div class="hero-tags">
         <span class="tag">⚡ Proses Cepat</span>
-        <span class="tag">🔒 Aman & Terpercaya</span>
-        <span class="tag">🌐 Multi-chain</span>
-        <span class="tag">💬 Admin Aktif</span>
+        <span class="tag">🔒 Aman</span>
+        <span class="tag">🌐 7 Chain</span>
+        <span class="tag">💬 Admin</span>
       </div>
     </div>
 
     <div class="hero-visual reveal">
-      <!-- Glow blobs -->
-      <div class="glow-blob gb1"></div>
-      <div class="glow-blob gb2"></div>
-      <div class="glow-blob gb3"></div>
-
-      <div class="crypto-scene">
+      <div class="crypto-orb cr-1"></div>
+      <div class="crypto-orb cr-2"></div>
+      <div class="crypto-orb cr-3"></div>
+      <div class="scene">
         <!-- Connection lines -->
-        <svg class="scene-lines" viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg">
-          <line x1="190" y1="190" x2="70" y2="58" stroke="rgba(240,185,11,0.25)" stroke-width="1.5" stroke-dasharray="6,4"/>
-          <line x1="190" y1="190" x2="310" y2="45" stroke="rgba(98,126,234,0.25)" stroke-width="1.5" stroke-dasharray="6,4"/>
-          <line x1="190" y1="190" x2="50" y2="310" stroke="rgba(130,71,229,0.25)" stroke-width="1.5" stroke-dasharray="6,4"/>
-          <line x1="190" y1="190" x2="330" y2="300" stroke="rgba(20,241,149,0.25)" stroke-width="1.5" stroke-dasharray="6,4"/>
-          <line x1="190" y1="190" x2="12" y2="190" stroke="rgba(0,152,234,0.25)" stroke-width="1.5" stroke-dasharray="6,4"/>
-          <line x1="190" y1="190" x2="370" y2="190" stroke="rgba(232,65,66,0.25)" stroke-width="1.5" stroke-dasharray="6,4"/>
-          <!-- Outer orbit decoration -->
-          <circle cx="190" cy="190" r="130" stroke="rgba(52,211,153,0.08)" stroke-width="1" fill="none" stroke-dasharray="4,8"/>
-          <circle cx="190" cy="190" r="170" stroke="rgba(103,232,249,0.06)" stroke-width="1" fill="none" stroke-dasharray="4,8"/>
+        <svg class="scene-lines" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <line x1="200" y1="200" x2="72" y2="50" stroke="rgba(240,185,11,0.2)" stroke-width="1.5" stroke-dasharray="6,4"/>
+          <line x1="200" y1="200" x2="332" y2="40" stroke="rgba(98,126,234,0.2)" stroke-width="1.5" stroke-dasharray="6,4"/>
+          <line x1="200" y1="200" x2="44" y2="312" stroke="rgba(130,71,229,0.2)" stroke-width="1.5" stroke-dasharray="6,4"/>
+          <line x1="200" y1="200" x2="340" y2="310" stroke="rgba(20,241,149,0.2)" stroke-width="1.5" stroke-dasharray="6,4"/>
+          <line x1="200" y1="200" x2="12" y2="200" stroke="rgba(0,152,234,0.2)" stroke-width="1.5" stroke-dasharray="6,4"/>
+          <line x1="200" y1="200" x2="388" y2="200" stroke="rgba(232,65,66,0.2)" stroke-width="1.5" stroke-dasharray="6,4"/>
         </svg>
-
-        <!-- Orbit rings -->
-        <div class="orbit-ring r1"></div>
-        <div class="orbit-ring r2"></div>
-
-        <!-- Central orb -->
-        <div class="orb-center">
-          <div class="orb-center-inner">⛽</div>
+        <!-- Rings -->
+        <div class="ring ring-1"></div>
+        <div class="ring ring-2"></div>
+        <div class="ring ring-3"></div>
+        <!-- Center orb -->
+        <div class="center-orb">
+          <div class="center-orb-inner">
+            <svg viewBox="0 0 40 40" fill="none">
+              <circle cx="20" cy="20" r="18" stroke="#022c22" stroke-width="2"/>
+              <path d="M12 24 L20 8 L28 24 L20 18 Z" fill="#022c22"/>
+            </svg>
+          </div>
         </div>
-
-        <!-- Floating coins -->
-        <div class="coin coin-bnb">BNB</div>
-        <div class="coin coin-eth">ETH</div>
-        <div class="coin coin-pol">POL</div>
-        <div class="coin coin-sol">SOL</div>
-        <div class="coin coin-gram">💎</div>
-        <div class="coin coin-ron">RON</div>
+        <!-- Floating dots -->
+        <div class="float-dot fd-1"></div>
+        <div class="float-dot fd-2"></div>
+        <div class="float-dot fd-3"></div>
+        <!-- Coins -->
+        <div class="orbit-item coin-1" title="BNB">
+          <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="28" fill="#f0b90b"/><circle cx="30" cy="30" r="24" fill="#f3ba2f"/><text x="30" y="35" text-anchor="middle" fill="#000" font-size="14" font-weight="800" font-family="Arial">BNB</text></svg>
+        </div>
+        <div class="orbit-item coin-2" title="ETH">
+          <svg viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#627eea"/><circle cx="28" cy="28" r="22" fill="#8b9ff8"/><text x="28" y="33" text-anchor="middle" fill="#fff" font-size="13" font-weight="800" font-family="Arial">ETH</text></svg>
+        </div>
+        <div class="orbit-item coin-3" title="POL">
+          <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" fill="#8247e5"/><circle cx="26" cy="26" r="20" fill="#a76bfa"/><text x="26" y="31" text-anchor="middle" fill="#fff" font-size="11" font-weight="800" font-family="Arial">POL</text></svg>
+        </div>
+        <div class="orbit-item coin-4" title="SOL">
+          <svg viewBox="0 0 54 54"><circle cx="27" cy="27" r="25" fill="#14f195"/><circle cx="27" cy="27" r="21" fill="#00d29a"/><text x="27" y="32" text-anchor="middle" fill="#000" font-size="11" font-weight="800" font-family="Arial">SOL</text></svg>
+        </div>
+        <div class="orbit-item coin-5" title="GRAM">
+          <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#0098ea"/><circle cx="24" cy="24" r="18" fill="#48b8f0"/><text x="24" y="29" text-anchor="middle" fill="#fff" font-size="8">💎</text></svg>
+        </div>
+        <div class="orbit-item coin-6" title="RON">
+          <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#e84142"/><circle cx="24" cy="24" r="18" fill="#f07070"/><text x="24" y="29" text-anchor="middle" fill="#fff" font-size="9" font-weight="800" font-family="Arial">RON</text></svg>
+        </div>
       </div>
     </div>
   </section>
@@ -610,147 +487,116 @@
   <!-- TENTANG -->
   <section id="tentang" class="section">
     <div class="section-head reveal">
-      <span class="eyebrow">💡 Tentang Kami</span>
+      <span class="eyebrow">💡 Tentang</span>
       <h2>Apa Itu GSI - RG CINEMA?</h2>
-      <p>GSI adalah singkatan dari <strong style="color:var(--green)">GasFee Store Indonesia</strong>, platform jual beli gas fee crypto untuk berbagai blockchain populer di Indonesia.</p>
+      <p>GSI adalah <strong style="color:var(--green)">GasFee Store Indonesia</strong>, platform jual beli gas fee crypto untuk berbagai blockchain populer di Indonesia.</p>
     </div>
     <div class="split reveal">
-      <div class="card">
-        <div class="card-num">🎯</div>
-        <h3>Misi Kami</h3>
-        <p>Membuat gas fee crypto dapat diakses oleh semua orang Indonesia dengan harga terjangkau, proses cepat, dan tanpa ribet.</p>
-      </div>
-      <div class="card">
-        <div class="card-num">🛡️</div>
-        <h3>Keamanan Terjamin</h3>
-        <p>Sistem otomatis terintegrasi langsung dengan blockchain. Setiap transaksi bisa diverifikasi di block explorer resmi.</p>
-      </div>
+      <div class="card"><div class="card-num">🎯</div><h3>Misi Kami</h3><p>Membuat gas fee crypto dapat diakses semua orang Indonesia dengan harga terjangkau, proses cepat, tanpa ribet.</p></div>
+      <div class="card"><div class="card-num">🛡️</div><h3>Keamanan</h3><p>Sistem otomatis terintegrasi blockchain. Setiap transaksi diverifikasi di block explorer resmi.</p></div>
     </div>
   </section>
 
   <!-- LAYANAN -->
   <section id="layanan" class="section">
-    <div class="section-head reveal">
-      <span class="eyebrow">🎯 Layanan Kami</span>
-      <h2>Apa yang Kami Tawarkan?</h2>
-    </div>
+    <div class="section-head reveal"><span class="eyebrow">🎯 Layanan</span><h2>Layanan Kami</h2></div>
     <div class="features reveal">
-      <div class="feature"><div class="feature-icon fi-green">🛒</div><h3>Pembelian Gas Fee</h3><p>Beli gas fee untuk 7 blockchain. Nominal Rp10.000 - Rp100.000 per transaksi.</p></div>
-      <div class="feature"><div class="feature-icon fi-blue">💳</div><h3>Top Up Saldo</h3><p>Isi saldo bot lewat admin dengan mudah. Minimal Rp10.000.</p></div>
-      <div class="feature"><div class="feature-icon fi-teal">🏆</div><h3>Program Referral</h3><p>Undang teman, dapatkan point! 1 point = Rp1. Minimal tukar 100 point.</p></div>
-      <div class="feature"><div class="feature-icon fi-amber">📦</div><h3>Cek Stock & Estimasi</h3><p>Harga real-time dari CoinGecko sebelum beli.</p></div>
-      <div class="feature"><div class="feature-icon fi-green">👤</div><h3>Profil & Riwayat</h3><p>Pantau saldo dan riwayat order langsung dari bot.</p></div>
-      <div class="feature"><div class="feature-icon fi-blue">💬</div><h3>Support Admin</h3><p>Admin aktif siap membantu lewat Telegram.</p></div>
+      <div class="feature"><div class="feature-icon fi-green">🛒</div><h3>Pembelian Gas Fee</h3><p>7 blockchain. Rp10.000 - Rp100.000 per transaksi.</p></div>
+      <div class="feature"><div class="feature-icon fi-blue">💳</div><h3>Top Up Saldo</h3><p>Isi saldo via admin. Minimal Rp10.000.</p></div>
+      <div class="feature"><div class="feature-icon fi-teal">🏆</div><h3>Program Referral</h3><p>Undang teman, dapat point! 1 point = Rp1.</p></div>
+      <div class="feature"><div class="feature-icon fi-amber">📦</div><h3>Stock & Estimasi</h3><p>Cek stok & harga real-time CoinGecko.</p></div>
+      <div class="feature"><div class="feature-icon fi-green">👤</div><h3>Profil & Riwayat</h3><p>Pantau saldo & order dari bot.</p></div>
+      <div class="feature"><div class="feature-icon fi-blue">💬</div><h3>Support Admin</h3><p>Admin aktif via Telegram.</p></div>
     </div>
   </section>
 
   <!-- BLOCKCHAIN -->
   <section class="section">
-    <div class="section-head reveal">
-      <span class="eyebrow">🌐 Multi-chain</span>
-      <h2>Blockchain yang Didukung</h2>
-    </div>
+    <div class="section-head reveal"><span class="eyebrow">🌐 Multi-chain</span><h2>Blockchain Didukung</h2></div>
     <div class="features reveal">
-      <div class="feature"><div class="feature-icon fi-amber">🔶</div><h3>BNB Chain</h3><p>Gas fee murah untuk DeFi, NFT, dan token di BSC.</p></div>
-      <div class="feature"><div class="feature-icon fi-blue">🔷</div><h3>ETH Base</h3><p>Layer 2 dari Coinbase. Transaksi cepat, gas fee rendah.</p></div>
-      <div class="feature"><div class="feature-icon fi-teal">🔷</div><h3>ETH Arbitrum</h3><p>Layer 2 terbesar untuk DeFi dan dApps.</p></div>
-      <div class="feature"><div class="feature-icon fi-green">🟣</div><h3>Polygon</h3><p>Gas fee super rendah. Cocok untuk gaming dan NFT.</p></div>
-      <div class="feature"><div class="feature-icon fi-blue">💎</div><h3>GRAM (ex Toncoin)</h3><p>Blockchain dari Telegram yang semakin populer.</p></div>
-      <div class="feature"><div class="feature-icon fi-amber">🔴</div><h3>Ronin</h3><p>Jaringan gaming Axie Infinity untuk NFT marketplace.</p></div>
+      <div class="feature"><div class="feature-icon fi-amber">
+        <svg width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="12" fill="#f0b90b"/><text x="13" y="17" text-anchor="middle" fill="#000" font-size="9" font-weight="800" font-family="Arial">B</text></svg>
+      </div><h3>BNB Chain</h3><p>Jaringan terpopuler di Indonesia. Gas fee murah untuk DeFi & NFT.</p></div>
+      <div class="feature"><div class="feature-icon fi-blue">
+        <svg width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="12" fill="#627eea"/><text x="13" y="17" text-anchor="middle" fill="#fff" font-size="8" font-weight="800" font-family="Arial">Ξ</text></svg>
+      </div><h3>ETH Base</h3><p>Layer 2 Coinbase. Cepat & gas fee rendah.</p></div>
+      <div class="feature"><div class="feature-icon fi-teal">
+        <svg width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="12" fill="#627eea"/><text x="13" y="17" text-anchor="middle" fill="#fff" font-size="8" font-weight="800" font-family="Arial">Ξ</text></svg>
+      </div><h3>ETH Arbitrum</h3><p>Layer 2 terbesar untuk DeFi & dApps.</p></div>
+      <div class="feature"><div class="feature-icon fi-green">
+        <svg width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="12" fill="#8247e5"/><text x="13" y="17" text-anchor="middle" fill="#fff" font-size="8" font-weight="800" font-family="Arial">M</text></svg>
+      </div><h3>Polygon</h3><p>Gas fee super rendah untuk gaming & NFT.</p></div>
+      <div class="feature"><div class="feature-icon fi-blue">
+        <svg width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="12" fill="#0098ea"/><text x="13" y="17" text-anchor="middle" fill="#fff" font-size="9">💎</text></svg>
+      </div><h3>GRAM</h3><p>Blockchain Telegram. Makin populer.</p></div>
+      <div class="feature"><div class="feature-icon fi-amber">
+        <svg width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="12" fill="#e84142"/><text x="13" y="17" text-anchor="middle" fill="#fff" font-size="7" font-weight="800" font-family="Arial">R</text></svg>
+      </div><h3>Ronin</h3><p>Jaringan gaming Axie Infinity.</p></div>
     </div>
-    <div style="margin-top:16px">
-      <div class="feature reveal" style="max-width:400px"><div class="feature-icon fi-green">🟢</div><h3>Solana</h3><p>Kecepatan tinggi, gas fee hampir nol.</p></div>
+    <div style="margin-top:16px"><div class="feature reveal" style="max-width:400px">
+      <div class="feature-icon fi-green">
+        <svg width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="12" fill="#14f195"/><text x="13" y="17" text-anchor="middle" fill="#000" font-size="7" font-weight="800" font-family="Arial">◎</text></svg>
+      </div><h3>Solana</h3><p>Kecepatan tinggi, gas fee hampir nol.</p></div>
     </div>
   </section>
 
   <!-- PANDUAN -->
   <section id="panduan" class="section">
-    <div class="section-head reveal">
-      <span class="eyebrow">📖 Panduan</span>
-      <h2>Cara Menggunakan Bot GSI</h2>
-    </div>
+    <div class="section-head reveal"><span class="eyebrow">📖 Panduan</span><h2>Cara Pakai Bot GSI</h2></div>
     <div class="steps reveal">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-body"><h3>Buka Bot & Register</h3><p>Buka <a href="https://t.me/rgcinema_bot" target="_blank" style="color:var(--green);font-weight:700">@rgcinema_bot</a> di Telegram. Masukkan email valid. Akun langsung aktif!</p></div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-body"><h3>Top Up Saldo</h3><p>Ketik <code style="padding:3px 10px;border-radius:6px;background:rgba(52,211,153,0.1);color:var(--green);font-weight:700">/topup</code>, masukkan nominal, hubungi admin. Saldo masuk otomatis!</p></div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-body"><h3>Cek Stock & Estimasi</h3><p>Ketik <code style="padding:3px 10px;border-radius:6px;background:rgba(52,211,153,0.1);color:var(--green);font-weight:700">/stock</code> untuk lihat ketersediaan dan estimasi harga real-time.</p></div>
-      </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-body"><h3>Beli Gas Fee</h3><p>Ketik <code style="padding:3px 10px;border-radius:6px;background:rgba(52,211,153,0.1);color:var(--green);font-weight:700">/beli</code>, pilih aset & nominal, masukkan alamat wallet. Gas fee dikirim!</p></div>
-      </div>
-      <div class="step">
-        <div class="step-num">5</div>
-        <div class="step-body"><h3>Cek Riwayat</h3><p>Ketik <code style="padding:3px 10px;border-radius:6px;background:rgba(52,211,153,0.1);color:var(--green);font-weight:700">/riwayat</code> untuk lihat semua order dan tx hash bukti transaksi.</p></div>
-      </div>
+      <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Buka Bot & Register</h3><p>Buka <a href="https://t.me/rgcinema_bot" style="color:var(--green);font-weight:700">@rgcinema_bot</a> di Telegram. Masukkan email valid. Akun langsung aktif!</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Top Up Saldo</h3><p>Ketik <code>/topup</code>, masukkan nominal, hubungi admin. Saldo masuk otomatis setelah bayar.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Cek Stock & Estimasi</h3><p>Ketik <code>/stock</code> untuk lihat ketersediaan & estimasi harga CoinGecko.</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Beli Gas Fee</h3><p>Ketik <code>/beli</code>, pilih aset & nominal, masukkan alamat wallet. Gas fee dikirim langsung!</p></div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-body"><h3>Cek Riwayat</h3><p>Ketik <code>/riwayat</code> untuk lihat order & tx hash bukti transaksi.</p></div></div>
     </div>
   </section>
 
-  <!-- COMMANDS -->
+  <!-- PERINTAH -->
   <section class="section">
-    <div class="section-head reveal">
-      <span class="eyebrow">⚡ Perintah Bot</span>
-      <h2>Daftar Perintah</h2>
-    </div>
+    <div class="section-head reveal"><span class="eyebrow">⚡ Perintah</span><h2>Daftar Perintah Bot</h2></div>
     <div class="cmd-grid reveal">
-      <div class="cmd-item"><div class="cmd-icon">🛒</div><div class="cmd-body"><h4>Beli Gas Fee</h4><code>/beli</code><p>Pilih aset, nominal, dan wallet tujuan.</p></div></div>
-      <div class="cmd-item"><div class="cmd-icon">📦</div><div class="cmd-body"><h4>Cek Stock</h4><code>/stock</code><p>Stok dan estimasi harga real-time.</p></div></div>
+      <div class="cmd-item"><div class="cmd-icon">🛒</div><div class="cmd-body"><h4>Beli Gas Fee</h4><code>/beli</code><p>Pilih aset, nominal, wallet tujuan.</p></div></div>
+      <div class="cmd-item"><div class="cmd-icon">📦</div><div class="cmd-body"><h4>Cek Stock</h4><code>/stock</code><p>Stok & estimasi harga real-time.</p></div></div>
       <div class="cmd-item"><div class="cmd-icon">💳</div><div class="cmd-body"><h4>Top Up</h4><code>/topup</code><p>Isi saldo. Minimal Rp10.000.</p></div></div>
-      <div class="cmd-item"><div class="cmd-icon">👤</div><div class="cmd-body"><h4>Profil</h4><code>/profil</code><p>Akun, saldo, dan referral.</p></div></div>
+      <div class="cmd-item"><div class="cmd-icon">👤</div><div class="cmd-body"><h4>Profil</h4><code>/profil</code><p>Akun, saldo, kode referral.</p></div></div>
       <div class="cmd-item"><div class="cmd-icon">📋</div><div class="cmd-body"><h4>Riwayat</h4><code>/riwayat</code><p>Semua riwayat transaksi.</p></div></div>
-      <div class="cmd-item"><div class="cmd-icon">🏆</div><div class="cmd-body"><h4>Referral</h4><code>/referral</code><p>Link undangan dan tukar point.</p></div></div>
-      <div class="cmd-item"><div class="cmd-icon">❓</div><div class="cmd-body"><h4>Bantuan</h4><code>/bantuan</code><p>Info update dan bantuan.</p></div></div>
-      <div class="cmd-item"><div class="cmd-icon">🏠</div><div class="cmd-body"><h4>Menu Utama</h4><code>/start</code><p>Kembali ke menu utama.</p></div></div>
+      <div class="cmd-item"><div class="cmd-icon">🏆</div><div class="cmd-body"><h4>Referral</h4><code>/referral</code><p>Link undangan, tukar point.</p></div></div>
+      <div class="cmd-item"><div class="cmd-icon">❓</div><div class="cmd-body"><h4>Bantuan</h4><code>/bantuan</code><p>Info update & bantuan.</p></div></div>
+      <div class="cmd-item"><div class="cmd-icon">🏠</div><div class="cmd-body"><h4>Menu</h4><code>/start</code><p>Kembali ke menu utama.</p></div></div>
     </div>
   </section>
 
   <!-- CTA -->
   <div class="cta-band reveal">
-    <div>
-      <h2>Siap Beli Gas Fee?</h2>
-      <p>Mulai sekarang lewat Telegram Bot kami.</p>
-    </div>
+    <div><h2>Siap Beli Gas Fee?</h2><p>Mulai sekarang lewat Telegram Bot</p></div>
     <div class="cta-actions">
       <a href="https://t.me/rgcinema_bot" target="_blank" class="btn btn-green">🤖 Buka Bot</a>
-      <a href="https://youtube.com/@rg_cinema?si=ngCQutDwju4HzinH" target="_blank" class="btn btn-ghost">📺 YouTube Channel</a>
+      <a href="https://youtube.com/@rg_cinema?si=ngCQutDwju4HzinH" target="_blank" class="btn btn-ghost">📺 YouTube</a>
     </div>
   </div>
 
   <!-- FAQ -->
   <section id="faq" class="section">
-    <div class="section-head reveal">
-      <span class="eyebrow">❓ FAQ</span>
-      <h2>Pertanyaan Umum</h2>
-    </div>
+    <div class="section-head reveal"><span class="eyebrow">❓ FAQ</span><h2>Pertanyaan Umum</h2></div>
     <div class="faq-list reveal">
-      <details class="faq-item"><summary>Apa itu gas fee crypto?</summary><div class="faq-body">Biaya untuk memproses transaksi di jaringan blockchain. Dibutuhkan agar transaksi bisa dijalankan oleh validator.</div></details>
-      <details class="faq-item"><summary>Berapa minimal beli gas fee?</summary><div class="faq-body">Minimal <strong>Rp10.000</strong> dan maksimal Rp100.000 per transaksi.</div></details>
-      <details class="faq-item"><summary>Bagaimana cara top up?</summary><div class="faq-body">Ketik <code>/topup</code>, masukkan nominal, hubungi admin. Saldo ditambahkan otomatis.</div></details>
-      <details class="faq-item"><summary>Blockchain apa saja yang didukung?</summary><div class="faq-body"><strong>BNB Chain, ETH Base, ETH Arbitrum, Polygon, GRAM, Ronin, Solana</strong>.</div></details>
-      <details class="faq-item"><summary>Jam operasional admin?</summary><div class="faq-body">Bot aktif <strong>24 jam</strong>. Top up saldo dilayani <strong>jam 07:00 - 22:00</strong> WIB.</div></details>
-      <details class="faq-item"><summary>Cara cek bukti transaksi?</summary><div class="faq-body">Bot memberikan <strong>tx hash</strong> dan link ke block explorer. Cek juga dengan <code>/riwayat</code>.</div></details>
-      <details class="faq-item"><summary>Program referral?</summary><div class="faq-body">Ketik <code>/referral</code>. Dapat point dari transaksi teman (1 point = Rp1). Minimal tukar 100 point.</div></details>
-      <details class="faq-item"><summary>Apakah transaksi aman?</summary><div class="faq-body">Ya! Sistem otomatis terintegrasi blockchain. Setiap transaksi bisa diverifikasi di block explorer.</div></details>
+      <details class="faq-item"><summary>Apa itu gas fee crypto?</summary><div class="faq-body">Biaya untuk memproses transaksi di blockchain. Dibutuhkan agar transaksi bisa dijalankan validator.</div></details>
+      <details class="faq-item"><summary>Minimal beli gas fee?</summary><div class="faq-body"><strong>Rp10.000</strong>, maksimal Rp100.000 per transaksi.</div></details>
+      <details class="faq-item"><summary>Cara top up?</summary><div class="faq-body">Ketik <code>/topup</code>, masukkan nominal, hubungi admin. Saldo otomatis bertambah.</div></details>
+      <details class="faq-item"><summary>Blockchain apa saja?</summary><div class="faq-body"><strong>BNB, ETH Base, ETH Arbitrum, Polygon, GRAM, Ronin, Solana</strong>.</div></details>
+      <details class="faq-item"><summary>Jam operasional?</summary><div class="faq-body">Bot <strong>24 jam</strong>. Top up saldo <strong>07:00-22:00</strong> WIB.</div></details>
+      <details class="faq-item"><summary>Bukti transaksi?</summary><div class="faq-body">Bot kasih <strong>tx hash</strong> + link block explorer. Cek juga via <code>/riwayat</code>.</div></details>
+      <details class="faq-item"><summary>Program referral?</summary><div class="faq-body">Ketik <code>/referral</code>. Dapat point dari teman (1 point = Rp1). Tukar minimal 100 point.</div></details>
       <details class="faq-item"><summary>Transaksi gagal?</summary><div class="faq-body">Saldo dikembalikan otomatis. Hubungi admin jika masalah berlanjut.</div></details>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer class="footer reveal">
-    <div>
-      <strong>GSI - RG CINEMA</strong>
-      <span>GasFee Store Indonesia &copy; <span id="currentYear"></span>. All rights reserved.</span>
-    </div>
+    <div><strong>GSI - RG CINEMA</strong><span>GasFee Store Indonesia &copy; <span id="currentYear"></span></span></div>
     <div class="footer-links">
-      <a href="https://t.me/rgcinema_bot" target="_blank">🤖 Bot</a>
-      <a href="https://youtube.com/@rg_cinema?si=ngCQutDwju4HzinH" target="_blank">📺 YouTube</a>
+      <a href="https://t.me/rgcinema_bot">🤖 Bot</a>
+      <a href="https://youtube.com/@rg_cinema?si=ngCQutDwju4HzinH">📺 YouTube</a>
       <a href="#tentang">Tentang</a>
       <a href="#faq">FAQ</a>
     </div>
@@ -758,126 +604,59 @@
 </div>
 
 <script>
-// Year
 document.getElementById('currentYear').textContent = new Date().getFullYear();
 
 // Scroll reveal
-var revealTargets = document.querySelectorAll('.reveal');
+var reveal = document.querySelectorAll('.reveal');
 if ('IntersectionObserver' in window) {
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  revealTargets.forEach(function(el) { observer.observe(el); });
-} else {
-  revealTargets.forEach(function(el) { el.classList.add('is-visible'); });
-}
+  var obs = new IntersectionObserver(function(e){ e.forEach(function(entry){ if(entry.isIntersecting){ entry.target.classList.add('is-visible'); obs.unobserve(entry.target); }}) }, {threshold:0.1});
+  reveal.forEach(function(el){ obs.observe(el); });
+} else { reveal.forEach(function(el){ el.classList.add('is-visible'); }); }
 
 // Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(function(link) {
-  link.addEventListener('click', function(e) {
-    var href = link.getAttribute('href');
-    if (href && href.length > 1) {
-      var target = document.querySelector(href);
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth' });
-        document.querySelector('.nav').classList.remove('open');
-      }
-    }
+document.querySelectorAll('a[href^="#"]').forEach(function(link){
+  link.addEventListener('click',function(e){
+    var t = document.querySelector(link.getAttribute('href'));
+    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); document.querySelector('.nav').classList.remove('open'); }
   });
 });
 
-// ===== FLOATING PARTICLES =====
-(function() {
-  var canvas = document.getElementById('particles');
-  if (!canvas) return;
-  var ctx = canvas.getContext('2d');
-  var w = 0, h = 0;
-  var particles = [];
-  var PARTICLE_COUNT = 50;
-  var CONNECT_DIST = 150;
-  var COLORS = [
-    [52, 211, 153],
-    [103, 232, 249],
-    [45, 212, 191],
-    [251, 191, 36]
-  ];
-
-  function resize() {
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = window.innerHeight;
+// Particles
+(function(){
+  var c = document.getElementById('particles');
+  if(!c) return;
+  var ctx = c.getContext('2d');
+  var w,h, particles=[], count=55, connect=150;
+  var colors = [[52,211,153],[103,232,249],[45,212,191]];
+  function resize(){ w=c.width=window.innerWidth; h=c.height=window.innerHeight; }
+  resize(); window.addEventListener('resize',resize);
+  for(var i=0;i<count;i++){
+    var cl = colors[Math.floor(Math.random()*colors.length)];
+    particles.push({ x:Math.random()*w, y:Math.random()*h, r:Math.random()*2.5+0.8, vx:(Math.random()-0.5)*0.6, vy:(Math.random()-0.5)*0.6, color:cl, alpha:Math.random()*0.5+0.2 });
   }
-  resize();
-  window.addEventListener('resize', resize);
-
-  // Create particles
-  for (var i = 0; i < PARTICLE_COUNT; i++) {
-    var c = COLORS[Math.floor(Math.random() * COLORS.length)];
-    particles.push({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      r: Math.random() * 2.5 + 0.8,
-      vx: (Math.random() - 0.5) * 0.5,
-      vy: (Math.random() - 0.5) * 0.5,
-      color: c,
-      alpha: Math.random() * 0.5 + 0.15
-    });
-  }
-
-  function animate() {
-    ctx.clearRect(0, 0, w, h);
-
-    // Update & draw particles
-    for (var i = 0; i < particles.length; i++) {
-      var p = particles[i];
-      p.x += p.vx;
-      p.y += p.vy;
-      if (p.x < 0) p.x = w;
-      if (p.x > w) p.x = 0;
-      if (p.y < 0) p.y = h;
-      if (p.y > h) p.y = 0;
-
-      // Draw particle with glow
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(' + p.color[0] + ',' + p.color[1] + ',' + p.color[2] + ',' + p.alpha + ')';
-      ctx.fill();
-
-      // Glow effect
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(' + p.color[0] + ',' + p.color[1] + ',' + p.color[2] + ',' + (p.alpha * 0.15) + ')';
-      ctx.fill();
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    for(var i=0;i<particles.length;i++){
+      var p=particles[i]; p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba('+p.color[0]+','+p.color[1]+','+p.color[2]+','+p.alpha+')'; ctx.fill();
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r*3,0,Math.PI*2);
+      ctx.fillStyle='rgba('+p.color[0]+','+p.color[1]+','+p.color[2]+','+(p.alpha*0.12)+')'; ctx.fill();
     }
-
-    // Draw connections
-    for (var i = 0; i < particles.length; i++) {
-      for (var j = i + 1; j < particles.length; j++) {
-        var dx = particles[i].x - particles[j].x;
-        var dy = particles[i].y - particles[j].y;
-        var dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < CONNECT_DIST) {
-          var opacity = 0.12 * (1 - dist / CONNECT_DIST);
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = 'rgba(52,211,153,' + opacity + ')';
-          ctx.lineWidth = 0.8;
-          ctx.stroke();
+    for(var i=0;i<particles.length;i++){
+      for(var j=i+1;j<particles.length;j++){
+        var dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y, dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<connect){
+          ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y);
+          ctx.strokeStyle='rgba(52,211,153,'+(0.15*(1-dist/connect))+')'; ctx.lineWidth=0.6; ctx.stroke();
         }
       }
     }
-
-    requestAnimationFrame(animate);
+    requestAnimationFrame(draw);
   }
-  animate();
+  draw();
 })();
 </script>
-
 </body>
 </html>
