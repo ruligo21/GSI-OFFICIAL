@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="GSI - RG CINEMA (GasFee Store Indonesia) — Jual beli gas fee crypto multi-chain via Telegram Bot." />
   <title>GSI - RG CINEMA | GasFee Store Indonesia</title>
+  <link rel="icon" type="image/png" href="assets/gasfee-logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -46,7 +47,6 @@
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
-    /* Dynamic gradient bg via pseudo */
     body::before {
       content: "";
       position: fixed;
@@ -76,7 +76,6 @@
     ul, ol { list-style: none; }
     .shell { position: relative; z-index: 2; width: var(--w); margin: 0 auto; padding: 0 0 50px; }
 
-    /* PARTICLES */
     #particles { position: fixed; inset: 0; z-index: 1; pointer-events: none; width: 100%; height: 100%; }
 
     /* TOPBAR */
@@ -89,7 +88,7 @@
       backdrop-filter: blur(24px); box-shadow: var(--shadow);
     }
     .brand { display: flex; align-items: center; gap: 12px; }
-    .brand-logo svg { width: 34px; height: 34px; }
+    .brand-logo img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 20px rgba(52,211,153,0.25); border: 2px solid rgba(52,211,153,0.3); }
     .brand-text strong { display: block; font-family: var(--font-display); font-size: 1.05rem; }
     .brand-text span { color: var(--muted); font-size: 0.82rem; }
     .nav { display: flex; align-items: center; gap: 26px; }
@@ -124,79 +123,73 @@
     .hero-tags { display: flex; flex-wrap: wrap; gap: 10px; }
     .tag { display: inline-flex; align-items: center; min-height: 30px; padding: 0 12px; border-radius: var(--radius-full); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); color: var(--muted); font-size: 0.82rem; font-weight: 600; }
 
-    /* ===== CRYPTO VISUAL ===== */
-    .hero-visual { position: relative; display: flex; align-items: center; justify-content: center; min-height: 480px; }
-    .crypto-orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; opacity: 0.6; }
-    .cr-1 { width: 240px; height: 240px; top: -20px; right: 10px; background: var(--green-glow); }
-    .cr-2 { width: 180px; height: 180px; bottom: 10px; left: -10px; background: var(--blue-glow); }
-    .cr-3 { width: 120px; height: 120px; top: 40%; left: 40%; background: rgba(45,212,191,0.15); }
-
-    .scene { position: relative; width: 400px; height: 400px; }
-
-    /* Center orb */
-    .center-orb {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-      width: 130px; height: 130px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(52,211,153,0.4), rgba(34,211,238,0.2), transparent 70%);
-      box-shadow: 0 0 80px rgba(52,211,153,0.3), 0 0 160px rgba(34,211,238,0.12);
-      display: flex; align-items: center; justify-content: center;
-      animation: centerFloat 5s ease-in-out infinite;
-      z-index: 2;
+    /* ===== HERO LOGO DISPLAY ===== */
+    .hero-logo-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 480px;
     }
-    .center-orb-inner {
-      width: 76px; height: 76px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--green), var(--blue));
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 0 40px var(--green-glow);
+    .hero-logo-glow {
+      position: absolute;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(52,211,153,0.35), rgba(34,211,238,0.2), transparent 70%);
+      filter: blur(40px);
+      animation: glowPulse 4s ease-in-out infinite;
     }
-    .center-orb-inner svg { width: 40px; height: 40px; }
-    @keyframes centerFloat {
-      0%,100% { transform: translate(-50%,-50%) scale(1); }
-      50% { transform: translate(-50%,-55%) scale(1.05); }
+    .hero-logo-main {
+      position: relative; z-index: 3;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 0 60px rgba(52,211,153,0.3), 0 0 120px rgba(34,211,238,0.15);
+      animation: heroLogoFloat 6s ease-in-out infinite;
+      border: 3px solid rgba(52,211,153,0.3);
+    }
+    .hero-logo-main img { width: 100%; height: 100%; object-fit: cover; }
+    @keyframes heroLogoFloat {
+      0%,100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-16px) scale(1.04); }
+    }
+    @keyframes glowPulse {
+      0%,100% { opacity: 0.7; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.1); }
     }
 
-    /* Rings */
-    .ring { position: absolute; top: 50%; left: 50%; border-radius: 50%; transform: translate(-50%,-50%); }
-    .ring-1 { width: 280px; height: 280px; border: 1.5px dashed rgba(52,211,153,0.2); animation: spin 30s linear infinite; }
-    .ring-2 { width: 360px; height: 360px; border: 1px dashed rgba(103,232,249,0.15); animation: spin 40s linear infinite reverse; }
-    .ring-3 { width: 320px; height: 320px; border: 1px dotted rgba(45,212,191,0.1); animation: spin 35s linear infinite; }
+    /* Hero ring decorations */
+    .hero-ring { position: absolute; top: 50%; left: 50%; border-radius: 50%; transform: translate(-50%,-50%); pointer-events: none; }
+    .hero-ring-1 { width: 300px; height: 300px; border: 2px dashed rgba(52,211,153,0.2); animation: spin 25s linear infinite; }
+    .hero-ring-2 { width: 380px; height: 380px; border: 1px dashed rgba(103,232,249,0.15); animation: spin 35s linear infinite reverse; }
+    .hero-ring-3 { width: 340px; height: 340px; border: 1px dotted rgba(45,212,191,0.1); animation: spin 30s linear infinite; }
     @keyframes spin { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(360deg); } }
 
-    /* SVG lines */
-    .scene-lines { position: absolute; inset: 0; z-index: 1; pointer-events: none; width: 100%; height: 100%; }
-
-    /* Coin orbiting items */
-    .orbit-item {
-      position: absolute; z-index: 3;
+    /* Floating mini coins around logo */
+    .mini-coin {
+      position: absolute; z-index: 4;
+      width: 44px; height: 44px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-weight: 700; color: #fff;
-      animation: coinBob 4s ease-in-out infinite;
+      animation: miniCoinFloat 5s ease-in-out infinite;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
-    .orbit-item svg { width: 100%; height: 100%; border-radius: 50%; }
-
-    @keyframes coinBob {
-      0%,100% { transform: translateY(0px) scale(1); }
-      50% { transform: translateY(-10px) scale(1.05); }
+    .mini-coin svg { width: 100%; height: 100%; border-radius: 50%; }
+    .mc-1 { top: 8%; left: 12%; animation-delay: 0s; }
+    .mc-2 { top: 6%; right: 10%; animation-delay: 0.8s; }
+    .mc-3 { bottom: 18%; left: 4%; animation-delay: 1.6s; }
+    .mc-4 { bottom: 12%; right: 4%; animation-delay: 2.4s; }
+    .mc-5 { top: 48%; left: -4%; animation-delay: 3.2s; width: 38px; height: 38px; }
+    .mc-6 { top: 48%; right: -4%; animation-delay: 4s; width: 38px; height: 38px; }
+    @keyframes miniCoinFloat {
+      0%,100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-12px) scale(1.08); }
     }
 
-    /* Position each coin */
-    .coin-1 { top: 4%; left: 18%; width: 60px; height: 60px; animation-delay: 0s; }
-    .coin-2 { top: 3%; right: 15%; width: 56px; height: 56px; animation-delay: 0.6s; }
-    .coin-3 { bottom: 22%; left: 6%; width: 52px; height: 52px; animation-delay: 1.2s; }
-    .coin-4 { bottom: 14%; right: 8%; width: 54px; height: 54px; animation-delay: 1.8s; }
-    .coin-5 { top: 46%; left: -2%; width: 48px; height: 48px; animation-delay: 2.4s; }
-    .coin-6 { top: 46%; right: -2%; width: 48px; height: 48px; animation-delay: 3s; }
-
-    /* Small floating elements (dots) */
-    .float-dot {
-      position: absolute; border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(52,211,153,0.6), transparent);
-      animation: dotFloat 6s ease-in-out infinite;
-      z-index: 1;
-    }
-    .fd-1 { width: 12px; height: 12px; top: 20%; right: 8%; animation-delay: 0.5s; opacity: 0.5; }
-    .fd-2 { width: 8px; height: 8px; bottom: 35%; right: 2%; animation-delay: 2s; opacity: 0.4; background: radial-gradient(circle, rgba(103,232,249,0.6), transparent); }
-    .fd-3 { width: 10px; height: 10px; top: 35%; left: 3%; animation-delay: 3.5s; opacity: 0.3; }
+    /* Floating dots */
+    .float-dot { position: absolute; border-radius: 50%; z-index: 1; animation: dotFloat 6s ease-in-out infinite; }
+    .fd-1 { width: 10px; height: 10px; top: 18%; right: 6%; background: radial-gradient(circle, rgba(52,211,153,0.6), transparent); animation-delay: 0.5s; opacity: 0.5; }
+    .fd-2 { width: 7px; height: 7px; bottom: 30%; right: 0; background: radial-gradient(circle, rgba(103,232,249,0.6), transparent); animation-delay: 2s; opacity: 0.4; }
+    .fd-3 { width: 8px; height: 8px; top: 32%; left: 0; background: radial-gradient(circle, rgba(52,211,153,0.5), transparent); animation-delay: 3.5s; opacity: 0.3; }
     @keyframes dotFloat {
       0%,100% { transform: translateY(0) scale(1); }
       50% { transform: translateY(-18px) scale(1.3); }
@@ -286,26 +279,39 @@
     .cmd-body p { margin: 6px 0 0; color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
 
     /* FAQ */
-    .faq-list { display: grid; gap: 12px; }
-    .faq-item { border-radius: var(--radius-md); background: var(--panel); border: 1px solid var(--line); overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
-    .faq-item:hover { border-color: rgba(52,211,153,0.2); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
-    .faq-item summary { cursor: pointer; list-style: none; padding: 22px 24px 18px; font-size: 1.02rem; font-weight: 600; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+    .faq-list { display: grid; gap: 10px; }
+    .faq-item {
+      border-radius: var(--radius-md); background: var(--panel); border: 1px solid var(--line);
+      overflow: hidden; transition: border-color 0.25s;
+    }
+    .faq-item[open] { border-color: rgba(52,211,153,0.25); }
+    .faq-item summary {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 22px; cursor: pointer; font-weight: 600; font-size: 1rem;
+      transition: color 0.2s; list-style: none;
+    }
     .faq-item summary::-webkit-details-marker { display: none; }
-    .faq-item summary::after { content: '+'; font-size: 1.4rem; color: var(--green); transition: transform 0.25s; }
+    .faq-item summary::after { content: '+'; font-size: 1.4rem; color: var(--green); transition: transform 0.3s; }
     .faq-item[open] summary::after { transform: rotate(45deg); }
-    .faq-item .faq-body { padding: 0 24px 22px; color: var(--muted); line-height: 1.7; }
+    .faq-item summary:hover { color: var(--green); }
+    .faq-body { padding: 0 22px 18px; color: var(--muted); line-height: 1.7; font-size: 0.95rem; }
 
     /* CTA */
     .cta-band {
-      display: flex; align-items: center; justify-content: space-between; gap: 20px;
-      padding: 32px; margin: 24px 0; border-radius: var(--radius-xl);
-      background: linear-gradient(135deg, rgba(52,211,153,0.08), rgba(34,211,238,0.06));
-      border: 1px solid rgba(52,211,153,0.12); transition: border-color 0.2s;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+      padding: 36px 40px; border-radius: var(--radius-xl);
+      background: linear-gradient(135deg, rgba(52,211,153,0.1), rgba(34,211,238,0.08));
+      border: 1px solid rgba(52,211,153,0.15);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      position: relative; overflow: hidden;
     }
-    .cta-band:hover { border-color: rgba(52,211,153,0.25); }
-    .cta-band h2 { font-family: var(--font-display); font-size: clamp(1.6rem,3vw,2.2rem); line-height: 1.15; letter-spacing: -0.03em; margin: 0; }
-    .cta-band p { margin: 6px 0 0; color: var(--muted); }
-    .cta-actions { display: flex; gap: 12px; flex-shrink: 0; }
+    .cta-band::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 20% 50%, rgba(52,211,153,0.08), transparent 60%);
+    }
+    .cta-band h2 { font-family: var(--font-display); font-size: clamp(1.6rem,3vw,2.2rem); line-height: 1.15; letter-spacing: -0.03em; margin: 0; position: relative; z-index: 1; }
+    .cta-band p { margin: 6px 0 0; color: var(--muted); position: relative; z-index: 1; }
+    .cta-actions { display: flex; gap: 12px; flex-shrink: 0; position: relative; z-index: 1; }
 
     .split { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
     .card {
@@ -318,7 +324,12 @@
     .card p { color: var(--muted); line-height: 1.7; margin: 0; }
 
     /* FOOTER */
-    .footer { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 28px 0 0; margin-top: 20px; border-top: 1px solid var(--line); }
+    .footer {
+      display: flex; align-items: center; justify-content: space-between; gap: 18px;
+      padding: 28px 0 0; margin-top: 20px; border-top: 1px solid var(--line);
+    }
+    .footer-brand { display: flex; align-items: center; gap: 12px; }
+    .footer-logo img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 12px rgba(52,211,153,0.2); }
     .footer strong { display: block; font-family: var(--font-display); font-size: 1rem; }
     .footer span { color: var(--muted); font-size: 0.9rem; }
     .footer-links { display: flex; gap: 20px; }
@@ -331,13 +342,62 @@
     .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 6px; }
     .menu-toggle span { display: block; width: 22px; height: 2px; background: var(--text); margin: 5px 0; transition: 0.2s; }
 
+    /* TENTANG SECTION */
+    .about-card {
+      padding: 32px; border-radius: var(--radius-xl); background: var(--panel);
+      border: 1px solid var(--line); position: relative; overflow: hidden;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .about-card:hover { border-color: rgba(52,211,153,0.25); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+    .about-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--green), var(--blue), var(--teal));
+    }
+    .about-layout { display: flex; align-items: center; gap: 32px; }
+    .about-logo-wrap {
+      flex-shrink: 0; width: 140px; height: 140px;
+      border-radius: 50%; overflow: hidden;
+      box-shadow: 0 0 40px rgba(52,211,153,0.25);
+      border: 3px solid rgba(52,211,153,0.25);
+      animation: aboutLogoPulse 4s ease-in-out infinite;
+    }
+    .about-logo-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    @keyframes aboutLogoPulse {
+      0%,100% { box-shadow: 0 0 40px rgba(52,211,153,0.25); }
+      50% { box-shadow: 0 0 60px rgba(52,211,153,0.4); }
+    }
+    .about-text h3 { font-family: var(--font-display); font-size: 1.4rem; margin: 0 0 12px; }
+    .about-text h3 .gradient-text { font-size: inherit; }
+    .about-text p { color: var(--muted); line-height: 1.8; margin: 0 0 12px; font-size: 1rem; }
+    .about-text p strong { color: var(--text); }
+    .about-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .about-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px; border-radius: var(--radius-full);
+      background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.12);
+      color: var(--green); font-size: 0.82rem; font-weight: 600;
+    }
+
+    /* Chain icons row */
+    .chain-icons { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+    .chain-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 16px; border-radius: var(--radius-full);
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.88rem; font-weight: 600; color: var(--muted);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .chain-badge:hover { border-color: rgba(52,211,153,0.2); color: var(--text); }
+    .chain-badge span { font-size: 1.1rem; }
+
     @media (max-width: 1024px) {
       .hero, .split { grid-template-columns: 1fr; }
       .features { grid-template-columns: 1fr 1fr; }
       .stats-bar { grid-template-columns: 1fr 1fr; }
-      .hero-visual { min-height: auto; }
       .cmd-grid { grid-template-columns: 1fr; }
-      .scene { width: 340px; height: 340px; margin: 0 auto; }
+      .about-layout { flex-direction: column; text-align: center; }
+      .about-chips { justify-content: center; }
+      .chain-icons { justify-content: center; }
     }
     @media (max-width: 768px) {
       .topbar { position: static; border-radius: var(--radius-lg); flex-wrap: wrap; justify-content: center; }
@@ -358,16 +418,11 @@
       .stats-bar { gap: 10px; }
       .stats-bar article { padding: 16px; }
       .stats-bar strong { font-size: 1.5rem; }
-      .scene { width: 290px; height: 290px; }
-      .center-orb { width: 100px; height: 100px; }
-      .center-orb-inner { width: 60px; height: 60px; }
-      .center-orb-inner svg { width: 32px; height: 32px; }
-      .ring-1 { width: 220px; height: 220px; }
-      .ring-2 { width: 280px; height: 280px; }
-      .ring-3 { width: 250px; height: 250px; }
-      .orbit-item { transform: scale(0.8); }
-      .coin-1 { left: 14%; }
-      .coin-2 { right: 10%; }
+      .hero-logo-main { width: 170px; height: 170px; }
+      .hero-ring-1 { width: 240px; height: 240px; }
+      .hero-ring-2 { width: 300px; height: 300px; }
+      .hero-ring-3 { width: 270px; height: 270px; }
+      .mini-coin { transform: scale(0.8); }
     }
   </style>
 </head>
@@ -381,12 +436,7 @@
   <nav class="topbar reveal">
     <div class="brand">
       <div class="brand-logo">
-        <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="17" cy="17" r="16" stroke="url(#g1)" stroke-width="1.5" fill="rgba(52,211,153,0.08)"/>
-          <path d="M10 20 L17 10 L24 20 Z" fill="url(#g1)" stroke="url(#g1)" stroke-width="0.5"/>
-          <circle cx="17" cy="20" r="2" fill="#022c22"/>
-          <defs><linearGradient id="g1" x1="0" y1="0" x2="34" y2="34"><stop stop-color="#34d399"/><stop offset="1" stop-color="#67e8f9"/></linearGradient></defs>
-        </svg>
+        <img src="assets/gasfee-logo.png" alt="GSI Logo" />
       </div>
       <div class="brand-text">
         <strong>GSI - RG CINEMA</strong>
@@ -422,57 +472,36 @@
       </div>
     </div>
 
-    <div class="hero-visual reveal">
-      <div class="crypto-orb cr-1"></div>
-      <div class="crypto-orb cr-2"></div>
-      <div class="crypto-orb cr-3"></div>
-      <div class="scene">
-        <!-- Connection lines -->
-        <svg class="scene-lines" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-          <line x1="200" y1="200" x2="72" y2="50" stroke="rgba(240,185,11,0.2)" stroke-width="1.5" stroke-dasharray="6,4"/>
-          <line x1="200" y1="200" x2="332" y2="40" stroke="rgba(98,126,234,0.2)" stroke-width="1.5" stroke-dasharray="6,4"/>
-          <line x1="200" y1="200" x2="44" y2="312" stroke="rgba(130,71,229,0.2)" stroke-width="1.5" stroke-dasharray="6,4"/>
-          <line x1="200" y1="200" x2="340" y2="310" stroke="rgba(20,241,149,0.2)" stroke-width="1.5" stroke-dasharray="6,4"/>
-          <line x1="200" y1="200" x2="12" y2="200" stroke="rgba(0,152,234,0.2)" stroke-width="1.5" stroke-dasharray="6,4"/>
-          <line x1="200" y1="200" x2="388" y2="200" stroke="rgba(232,65,66,0.2)" stroke-width="1.5" stroke-dasharray="6,4"/>
-        </svg>
-        <!-- Rings -->
-        <div class="ring ring-1"></div>
-        <div class="ring ring-2"></div>
-        <div class="ring ring-3"></div>
-        <!-- Center orb -->
-        <div class="center-orb">
-          <div class="center-orb-inner">
-            <svg viewBox="0 0 40 40" fill="none">
-              <circle cx="20" cy="20" r="18" stroke="#022c22" stroke-width="2"/>
-              <path d="M12 24 L20 8 L28 24 L20 18 Z" fill="#022c22"/>
-            </svg>
-          </div>
-        </div>
-        <!-- Floating dots -->
-        <div class="float-dot fd-1"></div>
-        <div class="float-dot fd-2"></div>
-        <div class="float-dot fd-3"></div>
-        <!-- Coins -->
-        <div class="orbit-item coin-1" title="BNB">
-          <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="28" fill="#f0b90b"/><circle cx="30" cy="30" r="24" fill="#f3ba2f"/><text x="30" y="35" text-anchor="middle" fill="#000" font-size="14" font-weight="800" font-family="Arial">BNB</text></svg>
-        </div>
-        <div class="orbit-item coin-2" title="ETH">
-          <svg viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#627eea"/><circle cx="28" cy="28" r="22" fill="#8b9ff8"/><text x="28" y="33" text-anchor="middle" fill="#fff" font-size="13" font-weight="800" font-family="Arial">ETH</text></svg>
-        </div>
-        <div class="orbit-item coin-3" title="POL">
-          <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" fill="#8247e5"/><circle cx="26" cy="26" r="20" fill="#a76bfa"/><text x="26" y="31" text-anchor="middle" fill="#fff" font-size="11" font-weight="800" font-family="Arial">POL</text></svg>
-        </div>
-        <div class="orbit-item coin-4" title="SOL">
-          <svg viewBox="0 0 54 54"><circle cx="27" cy="27" r="25" fill="#14f195"/><circle cx="27" cy="27" r="21" fill="#00d29a"/><text x="27" y="32" text-anchor="middle" fill="#000" font-size="11" font-weight="800" font-family="Arial">SOL</text></svg>
-        </div>
-        <div class="orbit-item coin-5" title="GRAM">
-          <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#0098ea"/><circle cx="24" cy="24" r="18" fill="#48b8f0"/><text x="24" y="29" text-anchor="middle" fill="#fff" font-size="8">💎</text></svg>
-        </div>
-        <div class="orbit-item coin-6" title="RON">
-          <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#e84142"/><circle cx="24" cy="24" r="18" fill="#f07070"/><text x="24" y="29" text-anchor="middle" fill="#fff" font-size="9" font-weight="800" font-family="Arial">RON</text></svg>
-        </div>
+    <div class="hero-logo-wrapper reveal">
+      <div class="hero-logo-glow"></div>
+      <div class="hero-ring hero-ring-1"></div>
+      <div class="hero-ring hero-ring-2"></div>
+      <div class="hero-ring hero-ring-3"></div>
+      <div class="hero-logo-main">
+        <img src="assets/gasfee-logo.png" alt="GasFee Store Indonesia" />
       </div>
+      <!-- Floating mini coins -->
+      <div class="mini-coin mc-1" title="BNB">
+        <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="28" fill="#f0b90b"/><circle cx="30" cy="30" r="24" fill="#f3ba2f"/><text x="30" y="35" text-anchor="middle" fill="#000" font-size="14" font-weight="800" font-family="Arial">BNB</text></svg>
+      </div>
+      <div class="mini-coin mc-2" title="ETH">
+        <svg viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#627eea"/><circle cx="28" cy="28" r="22" fill="#8b9ff8"/><text x="28" y="33" text-anchor="middle" fill="#fff" font-size="13" font-weight="800" font-family="Arial">ETH</text></svg>
+      </div>
+      <div class="mini-coin mc-3" title="POL">
+        <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" fill="#8247e5"/><circle cx="26" cy="26" r="20" fill="#a76bfa"/><text x="26" y="31" text-anchor="middle" fill="#fff" font-size="11" font-weight="800" font-family="Arial">POL</text></svg>
+      </div>
+      <div class="mini-coin mc-4" title="SOL">
+        <svg viewBox="0 0 54 54"><circle cx="27" cy="27" r="25" fill="#14f195"/><circle cx="27" cy="27" r="21" fill="#00d29a"/><text x="27" y="32" text-anchor="middle" fill="#000" font-size="11" font-weight="800" font-family="Arial">SOL</text></svg>
+      </div>
+      <div class="mini-coin mc-5" title="GRAM">
+        <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#0098ea"/><circle cx="24" cy="24" r="18" fill="#48b8f0"/><text x="24" y="29" text-anchor="middle" fill="#fff" font-size="10" font-weight="800" font-family="Arial">GRAM</text></svg>
+      </div>
+      <div class="mini-coin mc-6" title="RON">
+        <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#e84142"/><circle cx="24" cy="24" r="18" fill="#f07070"/><text x="24" y="29" text-anchor="middle" fill="#fff" font-size="9" font-weight="800" font-family="Arial">RON</text></svg>
+      </div>
+      <div class="float-dot fd-1"></div>
+      <div class="float-dot fd-2"></div>
+      <div class="float-dot fd-3"></div>
     </div>
   </section>
 
@@ -481,111 +510,209 @@
     <article><strong>7</strong><span>Blockchain Didukung</span></article>
     <article><strong>Rp10rb</strong><span>Minimal Pembelian</span></article>
     <article><strong>24/7</strong><span>Bot Aktif</span></article>
-    <article><strong>100%</strong><span>Transparansi Harga</span></article>
+    <article><strong>⚡</strong><span>Proses Instan</span></article>
   </div>
 
   <!-- TENTANG -->
   <section id="tentang" class="section">
-    <div class="section-head reveal">
-      <span class="eyebrow">💡 Tentang</span>
-      <h2>Apa Itu GSI - RG CINEMA?</h2>
-      <p>GSI adalah <strong style="color:var(--green)">GasFee Store Indonesia</strong>, platform jual beli gas fee crypto untuk berbagai blockchain populer di Indonesia.</p>
-    </div>
-    <div class="split reveal">
-      <div class="card"><div class="card-num">🎯</div><h3>Misi Kami</h3><p>Membuat gas fee crypto dapat diakses semua orang Indonesia dengan harga terjangkau, proses cepat, tanpa ribet.</p></div>
-      <div class="card"><div class="card-num">🛡️</div><h3>Keamanan</h3><p>Sistem otomatis terintegrasi blockchain. Setiap transaksi diverifikasi di block explorer resmi.</p></div>
+    <div class="about-card reveal">
+      <div class="about-layout">
+        <div class="about-logo-wrap">
+          <img src="assets/gasfee-logo.png" alt="GSI Logo" />
+        </div>
+        <div class="about-text">
+          <h3>Apa itu <span class="gradient-text">GSI - RG CINEMA</span>?</h3>
+          <p><strong>GSI (GasFee Store Indonesia)</strong> adalah layanan jual beli gas fee crypto multi-chain yang hadir untuk mempermudah kamu dalam bertransaksi di blockchain. Dengan menggunakan <strong>Telegram Bot</strong>, kamu bisa membeli gas fee kapan saja dan di mana saja.</p>
+          <p>Layanan ini dikelola oleh <strong>RG CINEMA</strong>, sebuah channel yang fokus pada edukasi dan layanan crypto di Indonesia. Gas fee yang kamu beli akan langsung masuk ke wallet kamu dengan proses yang <strong>cepat dan aman</strong>.</p>
+          <div class="about-chips">
+            <span class="about-chip">🤖 Telegram Bot</span>
+            <span class="about-chip">⚡ Proses Otomatis</span>
+            <span class="about-chip">🔒 Terpercaya</span>
+            <span class="about-chip">🇮🇩 Indonesia</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- LAYANAN -->
+  <!-- LAYANAN / FEATURES -->
   <section id="layanan" class="section">
-    <div class="section-head reveal"><span class="eyebrow">🎯 Layanan</span><h2>Layanan Kami</h2></div>
+    <div class="section-head reveal"><span class="eyebrow">💎 Fitur Utama</span><h2>Kenapa Pilih <span class="gradient-text">GSI</span>?</h2><p>Layanan gas fee crypto yang dirancang untuk kemudahan dan keamanan transaksi kamu.</p></div>
     <div class="features reveal">
-      <div class="feature"><div class="feature-icon fi-green">🛒</div><h3>Pembelian Gas Fee</h3><p>7 blockchain. Rp10.000 - Rp100.000 per transaksi.</p></div>
-      <div class="feature"><div class="feature-icon fi-blue">💳</div><h3>Top Up Saldo</h3><p>Isi saldo via admin. Minimal Rp10.000.</p></div>
-      <div class="feature"><div class="feature-icon fi-teal">🏆</div><h3>Program Referral</h3><p>Undang teman, dapat point! 1 point = Rp1.</p></div>
-      <div class="feature"><div class="feature-icon fi-amber">📦</div><h3>Stock & Estimasi</h3><p>Cek stok & harga real-time CoinGecko.</p></div>
-      <div class="feature"><div class="feature-icon fi-green">👤</div><h3>Profil & Riwayat</h3><p>Pantau saldo & order dari bot.</p></div>
-      <div class="feature"><div class="feature-icon fi-blue">💬</div><h3>Support Admin</h3><p>Admin aktif via Telegram.</p></div>
+      <div class="feature">
+        <div class="feature-icon fi-green">🚀</div>
+        <h3>Proses Super Cepat</h3>
+        <p>Gas fee langsung masuk ke wallet dalam hitungan detik setelah pembayaran dikonfirmasi.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon fi-blue">🌐</div>
+        <h3>Multi-Chain</h3>
+        <p>Mendukung 7 blockchain populer: BNB, ETH Base, ETH Arbitrum, Polygon, GRAM, Ronin, dan Solana.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon fi-teal">🔒</div>
+        <h3>Aman & Terpercaya</h3>
+        <p>Setiap transaksi mendapatkan bukti tx hash yang bisa diverifikasi langsung di block explorer.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon fi-amber">🤖</div>
+        <h3>Bot 24 Jam</h3>
+        <p>Telegram Bot aktif 24/7, kamu bisa beli gas fee kapan saja tanpa batasan waktu.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon fi-green">💰</div>
+        <h3>Terjangkau</h3>
+        <p>Minimal pembelian hanya Rp10.000, sangat cocok untuk kebutuhan transaksi harian.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon fi-blue">🎁</div>
+        <h3>Program Referral</h3>
+        <p>Undang teman dan dapatkan point referral. 1 Point = Rp1, tukar minimal 100 point.</p>
+      </div>
     </div>
   </section>
 
-  <!-- BLOCKCHAIN -->
+  <!-- CHAIN BADGES -->
   <section class="section">
-    <div class="section-head reveal"><span class="eyebrow">🌐 Multi-chain</span><h2>Blockchain Didukung</h2></div>
-    <div class="features reveal">
-      <div class="feature"><div class="feature-icon fi-amber">
-        <svg width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="12" fill="#f0b90b"/><text x="13" y="17" text-anchor="middle" fill="#000" font-size="9" font-weight="800" font-family="Arial">B</text></svg>
-      </div><h3>BNB Chain</h3><p>Jaringan terpopuler di Indonesia. Gas fee murah untuk DeFi & NFT.</p></div>
-      <div class="feature"><div class="feature-icon fi-blue">
-        <svg width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="12" fill="#627eea"/><text x="13" y="17" text-anchor="middle" fill="#fff" font-size="8" font-weight="800" font-family="Arial">Ξ</text></svg>
-      </div><h3>ETH Base</h3><p>Layer 2 Coinbase. Cepat & gas fee rendah.</p></div>
-      <div class="feature"><div class="feature-icon fi-teal">
-        <svg width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="12" fill="#627eea"/><text x="13" y="17" text-anchor="middle" fill="#fff" font-size="8" font-weight="800" font-family="Arial">Ξ</text></svg>
-      </div><h3>ETH Arbitrum</h3><p>Layer 2 terbesar untuk DeFi & dApps.</p></div>
-      <div class="feature"><div class="feature-icon fi-green">
-        <svg width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="12" fill="#8247e5"/><text x="13" y="17" text-anchor="middle" fill="#fff" font-size="8" font-weight="800" font-family="Arial">M</text></svg>
-      </div><h3>Polygon</h3><p>Gas fee super rendah untuk gaming & NFT.</p></div>
-      <div class="feature"><div class="feature-icon fi-blue">
-        <svg width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="12" fill="#0098ea"/><text x="13" y="17" text-anchor="middle" fill="#fff" font-size="9">💎</text></svg>
-      </div><h3>GRAM</h3><p>Blockchain Telegram. Makin populer.</p></div>
-      <div class="feature"><div class="feature-icon fi-amber">
-        <svg width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="12" fill="#e84142"/><text x="13" y="17" text-anchor="middle" fill="#fff" font-size="7" font-weight="800" font-family="Arial">R</text></svg>
-      </div><h3>Ronin</h3><p>Jaringan gaming Axie Infinity.</p></div>
-    </div>
-    <div style="margin-top:16px"><div class="feature reveal" style="max-width:400px">
-      <div class="feature-icon fi-green">
-        <svg width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="12" fill="#14f195"/><text x="13" y="17" text-anchor="middle" fill="#000" font-size="7" font-weight="800" font-family="Arial">◎</text></svg>
-      </div><h3>Solana</h3><p>Kecepatan tinggi, gas fee hampir nol.</p></div>
+    <div class="section-head reveal"><span class="eyebrow">🔗 Blockchain</span><h2>Chain yang <span class="gradient-text">Didukung</span></h2></div>
+    <div class="chain-icons reveal">
+      <span class="chain-badge"><span>🟡</span> BNB Chain</span>
+      <span class="chain-badge"><span>🔵</span> ETH Base</span>
+      <span class="chain-badge"><span>🔷</span> ETH Arbitrum</span>
+      <span class="chain-badge"><span>🟣</span> Polygon</span>
+      <span class="chain-badge"><span>💎</span> GRAM</span>
+      <span class="chain-badge"><span>🔴</span> Ronin</span>
+      <span class="chain-badge"><span>🟩</span> Solana</span>
     </div>
   </section>
 
-  <!-- PANDUAN -->
+  <!-- PANDUAN / STEPS -->
   <section id="panduan" class="section">
-    <div class="section-head reveal"><span class="eyebrow">📖 Panduan</span><h2>Cara Pakai Bot GSI</h2></div>
-    <div class="steps reveal">
-      <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Buka Bot & Register</h3><p>Buka <a href="https://t.me/rgcinema_bot" style="color:var(--green);font-weight:700">@rgcinema_bot</a> di Telegram. Masukkan email valid. Akun langsung aktif!</p></div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Top Up Saldo</h3><p>Ketik <code>/topup</code>, masukkan nominal, hubungi admin. Saldo masuk otomatis setelah bayar.</p></div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Cek Stock & Estimasi</h3><p>Ketik <code>/stock</code> untuk lihat ketersediaan & estimasi harga CoinGecko.</p></div></div>
-      <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Beli Gas Fee</h3><p>Ketik <code>/beli</code>, pilih aset & nominal, masukkan alamat wallet. Gas fee dikirim langsung!</p></div></div>
-      <div class="step"><div class="step-num">5</div><div class="step-body"><h3>Cek Riwayat</h3><p>Ketik <code>/riwayat</code> untuk lihat order & tx hash bukti transaksi.</p></div></div>
-    </div>
-  </section>
-
-  <!-- PERINTAH -->
-  <section class="section">
-    <div class="section-head reveal"><span class="eyebrow">⚡ Perintah</span><h2>Daftar Perintah Bot</h2></div>
-    <div class="cmd-grid reveal">
-      <div class="cmd-item"><div class="cmd-icon">🛒</div><div class="cmd-body"><h4>Beli Gas Fee</h4><code>/beli</code><p>Pilih aset, nominal, wallet tujuan.</p></div></div>
-      <div class="cmd-item"><div class="cmd-icon">📦</div><div class="cmd-body"><h4>Cek Stock</h4><code>/stock</code><p>Stok & estimasi harga real-time.</p></div></div>
-      <div class="cmd-item"><div class="cmd-icon">💳</div><div class="cmd-body"><h4>Top Up</h4><code>/topup</code><p>Isi saldo. Minimal Rp10.000.</p></div></div>
-      <div class="cmd-item"><div class="cmd-icon">👤</div><div class="cmd-body"><h4>Profil</h4><code>/profil</code><p>Akun, saldo, kode referral.</p></div></div>
-      <div class="cmd-item"><div class="cmd-icon">📋</div><div class="cmd-body"><h4>Riwayat</h4><code>/riwayat</code><p>Semua riwayat transaksi.</p></div></div>
-      <div class="cmd-item"><div class="cmd-icon">🏆</div><div class="cmd-body"><h4>Referral</h4><code>/referral</code><p>Link undangan, tukar point.</p></div></div>
-      <div class="cmd-item"><div class="cmd-icon">❓</div><div class="cmd-body"><h4>Bantuan</h4><code>/bantuan</code><p>Info update & bantuan.</p></div></div>
-      <div class="cmd-item"><div class="cmd-icon">🏠</div><div class="cmd-body"><h4>Menu</h4><code>/start</code><p>Kembali ke menu utama.</p></div></div>
+    <div class="section-head reveal"><span class="eyebrow">📖 Panduan</span><h2>Cara <span class="gradient-text">Menggunakan</span> Bot</h2><p>Ikuti langkah-langkah berikut untuk mulai beli gas fee crypto.</p></div>
+    <div class="split reveal">
+      <div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h3>Buka Telegram Bot</h3>
+              <p>Klik tombol "Mulai Beli Sekarang" atau cari <strong>@rgcinema_bot</strong> di Telegram.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h3>Top Up Saldo</h3>
+              <p>Ketik <code>/topup</code>, masukkan nominal, lalu hubungi admin untuk pembayaran. Jam admin: <strong>07:00 - 22:00 WIB</strong>.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h3>Pilih Blockchain</h3>
+              <p>Ketik <code>/beli</code> dan pilih chain yang kamu inginkan: BNB, Base, Arbitrum, Polygon, GRAM, Ronin, atau Solana.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <h3>Masukkan Nominal & Alamat</h3>
+              <p>Masukkan jumlah gas fee (min Rp10.000) dan alamat wallet tujuan kamu.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-body">
+              <h3>Selesai!</h3>
+              <p>Gas fee otomatis masuk ke wallet. Cek tx hash di block explorer untuk bukti transaksi.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <div class="card-num">💡</div>
+          <h3>Penting untuk Diketahui</h3>
+          <p>Jam operasional admin untuk top up saldo adalah <strong>07:00 - 22:00 WIB</strong>. Namun, Telegram Bot tetap aktif <strong>24 jam</strong> untuk pembelian gas fee.</p>
+          <p style="margin-top:14px;">Setiap transaksi yang berhasil akan mendapatkan <strong>tx hash</strong> sebagai bukti. Kamu bisa cek riwayat transaksi dengan ketik <code>/riwayat</code>.</p>
+          <p style="margin-top:14px;">Kunjungi <a href="https://youtube.com/@rg_cinema?si=ngCQutDwju4HzinH" target="_blank" style="color:var(--green);font-weight:600;">YouTube RG CINEMA</a> untuk tutorial dan update terbaru.</p>
+        </div>
+        <div class="card" style="margin-top:16px;">
+          <div class="card-num">⚙️</div>
+          <h3>Perintah Bot</h3>
+          <div class="cmd-grid" style="grid-template-columns:1fr;margin-top:12px;">
+            <div class="cmd-item">
+              <div class="cmd-icon">🏠</div>
+              <div class="cmd-body">
+                <h4>/start</h4>
+                <p>Memulai bot dan melihat menu utama.</p>
+              </div>
+            </div>
+            <div class="cmd-item">
+              <div class="cmd-icon">💰</div>
+              <div class="cmd-body">
+                <h4>/topup</h4>
+                <p>Top up saldo untuk pembelian gas fee.</p>
+              </div>
+            </div>
+            <div class="cmd-item">
+              <div class="cmd-icon">🛒</div>
+              <div class="cmd-body">
+                <h4>/beli</h4>
+                <p>Beli gas fee crypto multi-chain.</p>
+              </div>
+            </div>
+            <div class="cmd-item">
+              <div class="cmd-icon">📋</div>
+              <div class="cmd-body">
+                <h4>/riwayat</h4>
+                <p>Cek riwayat semua transaksi kamu.</p>
+              </div>
+            </div>
+            <div class="cmd-item">
+              <div class="cmd-icon">📊</div>
+              <div class="cmd-body">
+                <h4>/saldo</h4>
+                <p>Cek saldo yang tersedia di akun.</p>
+              </div>
+            </div>
+            <div class="cmd-item">
+              <div class="cmd-icon">🎁</div>
+              <div class="cmd-body">
+                <h4>/referral</h4>
+                <p>Dapatkan point dari mengundang teman.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <div class="cta-band reveal">
-    <div><h2>Siap Beli Gas Fee?</h2><p>Mulai sekarang lewat Telegram Bot</p></div>
-    <div class="cta-actions">
-      <a href="https://t.me/rgcinema_bot" target="_blank" class="btn btn-green">🤖 Buka Bot</a>
-      <a href="https://youtube.com/@rg_cinema?si=ngCQutDwju4HzinH" target="_blank" class="btn btn-ghost">📺 YouTube</a>
+  <section class="section">
+    <div class="cta-band reveal">
+      <div>
+        <h2>Siap Beli <span class="gradient-text">Gas Fee</span>?</h2>
+        <p>Mulai sekarang dan rasakan kemudahan transaksi crypto.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="https://t.me/rgcinema_bot" target="_blank" class="btn btn-green">🤖 Buka Bot</a>
+        <a href="https://youtube.com/@rg_cinema?si=ngCQutDwju4HzinH" target="_blank" class="btn btn-ghost">📺 YouTube</a>
+      </div>
     </div>
-  </div>
+  </section>
 
   <!-- FAQ -->
   <section id="faq" class="section">
     <div class="section-head reveal"><span class="eyebrow">❓ FAQ</span><h2>Pertanyaan Umum</h2></div>
     <div class="faq-list reveal">
-      <details class="faq-item"><summary>Apa itu gas fee crypto?</summary><div class="faq-body">Biaya untuk memproses transaksi di blockchain. Dibutuhkan agar transaksi bisa dijalankan validator.</div></details>
+      <details class="faq-item"><summary>Apa itu gas fee crypto?</summary><div class="faq-body">Biaya untuk memproses transaksi di blockchain. Dibutuhkan agar transaksi bisa dijalankan oleh validator.</div></details>
       <details class="faq-item"><summary>Minimal beli gas fee?</summary><div class="faq-body"><strong>Rp10.000</strong>, maksimal Rp100.000 per transaksi.</div></details>
-      <details class="faq-item"><summary>Cara top up?</summary><div class="faq-body">Ketik <code>/topup</code>, masukkan nominal, hubungi admin. Saldo otomatis bertambah.</div></details>
+      <details class="faq-item"><summary>Cara top up?</summary><div class="faq-body">Ketik <code>/topup</code>, masukkan nominal, hubungi admin. Saldo otomatis bertambah setelah pembayaran.</div></details>
       <details class="faq-item"><summary>Blockchain apa saja?</summary><div class="faq-body"><strong>BNB, ETH Base, ETH Arbitrum, Polygon, GRAM, Ronin, Solana</strong>.</div></details>
-      <details class="faq-item"><summary>Jam operasional?</summary><div class="faq-body">Bot <strong>24 jam</strong>. Top up saldo <strong>07:00-22:00</strong> WIB.</div></details>
-      <details class="faq-item"><summary>Bukti transaksi?</summary><div class="faq-body">Bot kasih <strong>tx hash</strong> + link block explorer. Cek juga via <code>/riwayat</code>.</div></details>
+      <details class="faq-item"><summary>Jam operasional?</summary><div class="faq-body">Bot aktif <strong>24 jam</strong>. Top up saldo via admin: <strong>07:00 - 22:00 WIB</strong>.</div></details>
+      <details class="faq-item"><summary>Bukti transaksi?</summary><div class="faq-body">Bot memberikan <strong>tx hash</strong> + link block explorer. Cek juga via <code>/riwayat</code>.</div></details>
       <details class="faq-item"><summary>Program referral?</summary><div class="faq-body">Ketik <code>/referral</code>. Dapat point dari teman (1 point = Rp1). Tukar minimal 100 point.</div></details>
       <details class="faq-item"><summary>Transaksi gagal?</summary><div class="faq-body">Saldo dikembalikan otomatis. Hubungi admin jika masalah berlanjut.</div></details>
     </div>
@@ -593,7 +720,15 @@
 
   <!-- FOOTER -->
   <footer class="footer reveal">
-    <div><strong>GSI - RG CINEMA</strong><span>GasFee Store Indonesia &copy; <span id="currentYear"></span></span></div>
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="assets/gasfee-logo.png" alt="GSI Logo" />
+      </div>
+      <div>
+        <strong>GSI - RG CINEMA</strong>
+        <span>GasFee Store Indonesia &copy; <span id="currentYear"></span></span>
+      </div>
+    </div>
     <div class="footer-links">
       <a href="https://t.me/rgcinema_bot">🤖 Bot</a>
       <a href="https://youtube.com/@rg_cinema?si=ngCQutDwju4HzinH">📺 YouTube</a>
