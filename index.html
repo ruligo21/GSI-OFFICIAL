@@ -173,13 +173,14 @@
       animation: miniCoinFloat 5s ease-in-out infinite;
       box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
-    .mini-coin svg { width: 100%; height: 100%; border-radius: 50%; }
+    .mini-coin img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
     .mc-1 { top: 8%; left: 12%; animation-delay: 0s; }
     .mc-2 { top: 6%; right: 10%; animation-delay: 0.8s; }
     .mc-3 { bottom: 18%; left: 4%; animation-delay: 1.6s; }
     .mc-4 { bottom: 12%; right: 4%; animation-delay: 2.4s; }
     .mc-5 { top: 48%; left: -4%; animation-delay: 3.2s; width: 38px; height: 38px; }
     .mc-6 { top: 48%; right: -4%; animation-delay: 4s; width: 38px; height: 38px; }
+    .mc-7 { top: 28%; left: -6%; animation-delay: 4.8s; width: 40px; height: 40px; }
     @keyframes miniCoinFloat {
       0%,100% { transform: translateY(0) scale(1); }
       50% { transform: translateY(-12px) scale(1.08); }
@@ -482,22 +483,25 @@
       </div>
       <!-- Floating mini coins -->
       <div class="mini-coin mc-1" title="BNB">
-        <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="28" fill="#f0b90b"/><circle cx="30" cy="30" r="24" fill="#f3ba2f"/><text x="30" y="35" text-anchor="middle" fill="#000" font-size="14" font-weight="800" font-family="Arial">BNB</text></svg>
+        <img src="assets/bnb.png" alt="BNB" />
       </div>
-      <div class="mini-coin mc-2" title="ETH">
-        <svg viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#627eea"/><circle cx="28" cy="28" r="22" fill="#8b9ff8"/><text x="28" y="33" text-anchor="middle" fill="#fff" font-size="13" font-weight="800" font-family="Arial">ETH</text></svg>
+      <div class="mini-coin mc-2" title="ETH Base">
+        <img src="assets/ethbase.png" alt="ETH Base" />
       </div>
-      <div class="mini-coin mc-3" title="POL">
-        <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" fill="#8247e5"/><circle cx="26" cy="26" r="20" fill="#a76bfa"/><text x="26" y="31" text-anchor="middle" fill="#fff" font-size="11" font-weight="800" font-family="Arial">POL</text></svg>
+      <div class="mini-coin mc-3" title="Polygon">
+        <img src="assets/polygon.png" alt="Polygon" />
       </div>
-      <div class="mini-coin mc-4" title="SOL">
-        <svg viewBox="0 0 54 54"><circle cx="27" cy="27" r="25" fill="#14f195"/><circle cx="27" cy="27" r="21" fill="#00d29a"/><text x="27" y="32" text-anchor="middle" fill="#000" font-size="11" font-weight="800" font-family="Arial">SOL</text></svg>
+      <div class="mini-coin mc-4" title="Solana">
+        <img src="assets/solana.png" alt="Solana" />
       </div>
       <div class="mini-coin mc-5" title="GRAM">
-        <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#0098ea"/><circle cx="24" cy="24" r="18" fill="#48b8f0"/><text x="24" y="29" text-anchor="middle" fill="#fff" font-size="10" font-weight="800" font-family="Arial">GRAM</text></svg>
+        <img src="assets/gram.png" alt="GRAM" />
       </div>
-      <div class="mini-coin mc-6" title="RON">
-        <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="#e84142"/><circle cx="24" cy="24" r="18" fill="#f07070"/><text x="24" y="29" text-anchor="middle" fill="#fff" font-size="9" font-weight="800" font-family="Arial">RON</text></svg>
+      <div class="mini-coin mc-6" title="Ronin">
+        <img src="assets/ronin.png" alt="Ronin" />
+      </div>
+      <div class="mini-coin mc-7" title="ETH Arbitrum">
+        <img src="assets/etharbitrum.png" alt="ETH Arbitrum" />
       </div>
       <div class="float-dot fd-1"></div>
       <div class="float-dot fd-2"></div>
